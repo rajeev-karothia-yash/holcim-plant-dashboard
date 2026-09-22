@@ -1174,41 +1174,6 @@
       .hamburger-btn:hover {
         background: #1e2d40;
       }
-      .plant-tree {
-        padding: 0 2px;
-      }
-      .plant-root {
-        font-size: 12px;
-        font-weight: 700;
-        color: #e7eff6;
-        padding: 8px 12px 6px;
-      }
-      .region-node {
-        margin-left: 8px;
-      }
-      .region-label {
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.8px;
-        color: #9bb0c4;
-        padding: 7px 10px 4px;
-        border-left: 1px solid #2a3b4f;
-      }
-      .region-node .plant-item {
-        margin-left: 10px;
-        padding: 7px 10px 7px 12px;
-        border-left: 1px solid #2a3b4f;
-      }
-      .plant-branch {
-        color: #5f7690;
-        margin-right: 7px;
-      }
-      .plant-item .plant-path {
-        display: flex;
-        align-items: center;
-        min-width: 0;
-      }
-
       /* PLANT DETAILS IN THE PLANT POPUP */
       .dr-details {
         display: grid;
@@ -2576,6 +2541,869 @@
         height: 100%;
         display: block;
       }
+
+      /* =====================================================================
+         SIDEBAR: PLANT HIERARCHY (Region > Country > Plant) + SEARCH
+         ===================================================================== */
+      .side .plants-grp {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-bottom: 8px;
+      }
+      .plants-grp .grp-count {
+        font-size: 13px;
+        letter-spacing: 0;
+        text-transform: none;
+        color: #7f96ad;
+        font-variant-numeric: tabular-nums;
+      }
+      .ptree-search {
+        position: relative;
+        margin: 0 2px 8px;
+        flex: 0 0 auto;
+      }
+      .ptree-search input {
+        width: 100%;
+        height: 38px;
+        padding: 0 32px 0 34px;
+        border-radius: 9px;
+        border: 1px solid #2a3b4f;
+        background: #0c1420;
+        color: #e7eff6;
+        font: inherit;
+        font-size: 15px;
+      }
+      .ptree-search input::placeholder {
+        color: #7f96ad;
+      }
+      .ptree-search input::-webkit-search-cancel-button {
+        display: none;
+      }
+      .ptree-search input:focus-visible {
+        outline: 2px solid #2dd4bf;
+        outline-offset: 1px;
+        border-color: transparent;
+      }
+      .ptree-search svg {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+        transform: translateY(-50%);
+        color: #7f96ad;
+        pointer-events: none;
+      }
+      .ptree-clear {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: #9bb0c4;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ptree-clear:hover {
+        background: #1e2d40;
+        color: #e7eff6;
+      }
+      .ptree-clear:focus-visible,
+      .pt-row:focus-visible {
+        outline: 2px solid #2dd4bf;
+        outline-offset: -2px;
+      }
+      .ptree {
+        padding: 0 2px;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .pt-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        width: 100%;
+        min-width: 0;
+        border: 0;
+        border-radius: 7px;
+        background: transparent;
+        color: #9bb0c4;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .pt-row:hover {
+        background: #162333;
+        color: #e7eff6;
+      }
+      .pt-region {
+        padding: 8px 8px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #e7eff6;
+      }
+      .pt-country {
+        padding: 6px 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .pt-plant {
+        padding: 7px 8px 7px 8px;
+        font-size: 15px;
+      }
+      .pt-plant.on {
+        background: #1e2d40;
+        color: #e7eff6;
+        box-shadow: inset 3px 0 0 #2dd4bf;
+      }
+      .pt-chev {
+        flex: 0 0 12px;
+        width: 12px;
+        font-size: 10px;
+        color: #7f96ad;
+        transition: transform 0.15s ease;
+      }
+      .pt-row[aria-expanded="false"] .pt-chev {
+        transform: rotate(-90deg);
+      }
+      .pt-label {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .pt-n {
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #7f96ad;
+        font-variant-numeric: tabular-nums;
+      }
+      .pt-kids {
+        margin-left: 11px;
+        padding-left: 5px;
+        border-left: 1px solid #2a3b4f;
+      }
+      .pt-plant .plant-branch {
+        flex: 0 0 auto;
+        margin-right: 0;
+        color: #5f7690;
+      }
+      .pt-dot {
+        flex: 0 0 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .pt-empty {
+        padding: 10px 12px;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #9bb0c4;
+      }
+
+      /* =====================================================================
+         SHARED SMALL PIECES
+         ===================================================================== */
+      .cfg-link {
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--cyan);
+        font: inherit;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .empty-note {
+        padding: 22px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--ink-3);
+        text-align: center;
+      }
+      .dr-empty {
+        grid-column: 1 / -1;
+        padding: 18px 4px;
+        font-size: 14px;
+        color: var(--ink-2);
+      }
+
+      /* =====================================================================
+         CONFIGURATION PAGE
+         ===================================================================== */
+      #pgConfig,
+      .cfg-modal {
+        color-scheme: dark;
+      }
+      [data-theme="light"] #pgConfig,
+      [data-theme="light"] .cfg-modal {
+        color-scheme: light;
+      }
+      .cfg-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .cfg-head h1 {
+        font-size: 27px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+      }
+      .cfg-head p {
+        max-width: 62ch;
+        margin-top: 5px;
+        font-size: 14.5px;
+        line-height: 1.45;
+        color: var(--ink-2);
+      }
+      .cfg-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        height: 38px;
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        font-size: 14.5px;
+        font-weight: 600;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .cfg-btn:hover {
+        background: var(--surface-2);
+      }
+      .cfg-btn:focus-visible,
+      .cfg-tab:focus-visible,
+      .cfg-plant:focus-visible,
+      .ar-h:focus-visible,
+      .cfg-link:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 2px;
+      }
+      .cfg-btn.primary {
+        border-color: var(--teal);
+        background: var(--teal);
+        color: #06262b;
+      }
+      .cfg-btn.primary:hover {
+        filter: brightness(1.08);
+      }
+      .cfg-btn.danger {
+        color: var(--crit);
+        border-color: rgba(242, 107, 107, 0.45);
+      }
+      .cfg-btn.danger:hover {
+        background: rgba(242, 107, 107, 0.12);
+      }
+      .cfg-btn.danger-solid {
+        border-color: var(--crit);
+        background: var(--crit);
+        color: #1d0a0a;
+      }
+      .cfg-btn.sm {
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 7px;
+        font-size: 13.5px;
+      }
+      .cfg-btn.ghost {
+        border-color: transparent;
+        background: transparent;
+        color: var(--ink-2);
+      }
+      .cfg-btn.ghost:hover {
+        background: var(--surface-2);
+        color: var(--crit);
+      }
+      .cfg-layout {
+        display: grid;
+        grid-template-columns: 300px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      .cfg-list,
+      .cfg-detail {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+      }
+      .cfg-list {
+        overflow: hidden;
+      }
+      .cfg-detail {
+        min-height: 440px;
+      }
+      .cfg-input,
+      .cfg-select {
+        height: 38px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--bg2);
+        color: var(--ink);
+        font: inherit;
+        font-size: 14.5px;
+      }
+      .cfg-input {
+        min-width: 0;
+      }
+      .cfg-input::placeholder {
+        color: var(--ink-3);
+      }
+      .cfg-input:focus-visible,
+      .cfg-select:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 1px;
+      }
+      .cfg-list-search {
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .cfg-list-search .cfg-input {
+        width: 100%;
+      }
+      .cfg-region {
+        padding: 14px 16px 6px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--ink-2);
+      }
+      .cfg-plant {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        padding: 10px 16px 10px 13px;
+        border: 0;
+        border-left: 3px solid transparent;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+      .cfg-plant:hover {
+        background: var(--surface-2);
+      }
+      .cfg-plant.on {
+        border-left-color: var(--teal);
+        background: var(--surface-2);
+      }
+      .cfg-plant-main b {
+        display: block;
+        font-size: 15.5px;
+        font-weight: 600;
+      }
+      .cfg-plant small {
+        font-size: 13px;
+        color: var(--ink-3);
+      }
+      .cfg-plant-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 3px;
+      }
+      .cfg-code {
+        padding: 1px 7px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--ink-2);
+        vertical-align: middle;
+      }
+      .cfg-list-empty {
+        padding: 22px 16px;
+        font-size: 14px;
+        color: var(--ink-3);
+      }
+      .cfg-dhead {
+        padding: 20px 24px 0;
+      }
+      .cfg-path {
+        font-size: 13.5px;
+        color: var(--ink-3);
+      }
+      .cfg-dtitle {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 4px;
+      }
+      .cfg-dtitle h2 {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+      }
+      .cfg-dtitle h2 .cfg-code {
+        margin-left: 8px;
+        position: relative;
+        top: -3px;
+      }
+      .cfg-dactions {
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .cfg-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+        margin-top: 8px;
+        font-size: 14.5px;
+        color: var(--ink-2);
+      }
+      .cfg-summary b {
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+      .cfg-summary .need,
+      .cfg-summary .need b {
+        color: var(--amber);
+      }
+      .cfg-tabs {
+        display: flex;
+        gap: 4px;
+        margin-top: 16px;
+        padding: 0 24px;
+        border-bottom: 1px solid var(--line);
+      }
+      .cfg-tab {
+        margin-bottom: -1px;
+        padding: 10px 14px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        color: var(--ink-2);
+        font: inherit;
+        font-size: 15.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .cfg-tab:hover {
+        color: var(--ink);
+      }
+      .cfg-tab.on {
+        border-bottom-color: var(--teal);
+        color: var(--ink);
+      }
+      .cfg-tab .n {
+        margin-left: 6px;
+        font-weight: 500;
+        color: var(--ink-3);
+        font-variant-numeric: tabular-nums;
+      }
+      .cfg-pane {
+        padding: 18px 24px 24px;
+      }
+      .cfg-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .cfg-toolbar .grow,
+      .ar-h .grow {
+        flex: 1;
+      }
+      .cfg-toolbar .cfg-input {
+        width: 240px;
+      }
+      .cfg-tip {
+        font-size: 14px;
+        color: var(--ink-2);
+      }
+      .cfg-empty {
+        margin: 26px 24px;
+        padding: 34px 24px;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        text-align: center;
+        color: var(--ink-2);
+      }
+      .cfg-pane .cfg-empty {
+        margin: 0;
+      }
+      .cfg-empty b {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 17px;
+        color: var(--ink);
+      }
+      .cfg-empty p {
+        max-width: 54ch;
+        margin: 0 auto 16px;
+        font-size: 14.5px;
+        line-height: 1.5;
+      }
+
+      /* KPI table */
+      .kt {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .kt-row {
+        display: grid;
+        grid-template-columns: minmax(150px, 1.3fr) 84px minmax(190px, 2fr) 104px 150px;
+        gap: 12px;
+        align-items: center;
+        padding: 10px 14px;
+        border-top: 1px solid var(--line);
+        font-size: 14.5px;
+      }
+      .kt-row.head {
+        border-top: 0;
+        background: var(--surface-2);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-3);
+      }
+      .kt-group {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 14px;
+        border-top: 1px solid var(--line);
+        background: var(--surface-2);
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .kt-group:first-of-type {
+        border-top: 0;
+      }
+      .kt-group i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .kt-group span {
+        font-weight: 500;
+        color: var(--ink-3);
+      }
+      .kt-name {
+        font-weight: 600;
+        overflow-wrap: anywhere;
+      }
+      .kt-unit,
+      .kt-refresh {
+        color: var(--ink-2);
+        font-size: 14px;
+      }
+      .kt-src b {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .kt-src code {
+        display: block;
+        margin-top: 2px;
+        font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+        font-size: 12.5px;
+        color: var(--ink-2);
+        overflow-wrap: anywhere;
+      }
+      .kt-act {
+        display: flex;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+      .cfg-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .cfg-chip.warn {
+        background: rgba(240, 180, 76, 0.16);
+        color: var(--amber);
+      }
+      .cfg-chip.mute {
+        background: var(--surface-2);
+        color: var(--ink-3);
+      }
+
+      /* Asset rows */
+      .ar {
+        margin-bottom: 8px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .ar-h {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 11px 14px;
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+      .ar-h:hover {
+        background: var(--surface-2);
+      }
+      .ar-h .pt-chev {
+        color: var(--ink-3);
+      }
+      .ar-h[aria-expanded="false"] .pt-chev {
+        transform: rotate(-90deg);
+      }
+      .ar-id {
+        font-size: 15.5px;
+        font-weight: 600;
+      }
+      .ar-type,
+      .ar-n {
+        font-size: 13.5px;
+        color: var(--ink-3);
+      }
+      .ar-b {
+        padding: 12px 14px 14px;
+        border-top: 1px solid var(--line);
+      }
+      .ar-b .cfg-toolbar {
+        margin-bottom: 10px;
+      }
+
+      .cfg-foot {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 18px;
+      }
+
+      /* Dialog */
+      .cfg-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(4, 9, 16, 0.64);
+      }
+      .cfg-modal.on {
+        display: flex;
+      }
+      .cfg-dialog {
+        display: flex;
+        width: min(540px, 100%);
+        max-height: calc(100vh - 40px);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--bg2);
+        color: var(--ink);
+        box-shadow: var(--shadow);
+      }
+      .cfg-dialog.wide {
+        width: min(660px, 100%);
+      }
+      .cfg-dialog form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 0;
+      }
+      .cfg-dh {
+        padding: 22px 24px 4px;
+      }
+      .cfg-dh h3 {
+        font-size: 21px;
+        font-weight: 700;
+      }
+      .cfg-dh p {
+        margin-top: 5px;
+        font-size: 14.5px;
+        line-height: 1.45;
+        color: var(--ink-2);
+      }
+      .cfg-db {
+        flex: 1;
+        min-height: 0;
+        padding: 16px 24px 8px;
+        overflow-y: auto;
+      }
+      .cfg-db > p {
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--ink-2);
+        padding-bottom: 8px;
+      }
+      .cfg-df {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 14px 24px 18px;
+        border-top: 1px solid var(--line);
+      }
+      .cfg-field {
+        margin-bottom: 15px;
+      }
+      .cfg-field[hidden] {
+        display: none;
+      }
+      .cfg-field > label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .cfg-field input[type="text"],
+      .cfg-field select {
+        width: 100%;
+        height: 42px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        font-size: 15px;
+      }
+      .cfg-field input:disabled,
+      .cfg-field select:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+      .cfg-field input:focus-visible,
+      .cfg-field select:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 1px;
+      }
+      .cfg-field.bad input,
+      .cfg-field.bad select {
+        border-color: var(--crit);
+      }
+      .cfg-field .hint {
+        margin-top: 6px;
+        font-size: 13px;
+        line-height: 1.4;
+        color: var(--ink-3);
+      }
+      .cfg-err {
+        margin-top: 6px;
+        font-size: 13px;
+        color: var(--crit);
+      }
+      .cfg-row2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .cfg-checks {
+        display: grid;
+        gap: 2px;
+        padding: 6px 4px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--surface);
+      }
+      .cfg-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-size: 14.5px;
+        cursor: pointer;
+      }
+      .cfg-check:hover {
+        background: var(--surface-2);
+      }
+      .cfg-check input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--teal);
+      }
+      .cfg-check .mute {
+        color: var(--ink-3);
+        font-size: 13px;
+      }
+      .cfg-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 28px;
+        z-index: 160;
+        padding: 11px 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--surface-2);
+        color: var(--ink);
+        font-size: 14.5px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translate(-50%, 16px);
+        pointer-events: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+      }
+      .cfg-toast.on {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .cfg-toast,
+        .pt-chev {
+          transition: none;
+        }
+      }
+      @media (max-width: 1180px) {
+        .cfg-layout {
+          grid-template-columns: 1fr;
+        }
+        .cfg-list {
+          max-height: 300px;
+          overflow-y: auto;
+        }
+      }
+      @media (max-width: 900px) {
+        .kt-row.head {
+          display: none;
+        }
+        .kt-row {
+          grid-template-columns: 1fr auto;
+        }
+        .kt-unit,
+        .kt-refresh {
+          display: none;
+        }
+        .kt-src {
+          grid-column: 1 / -1;
+        }
+        .cfg-head,
+        .cfg-dtitle {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .cfg-row2 {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2584,12 +3412,25 @@
         <div class="brand">
           <span class="brand-text"><b>Plants</b></span>
         </div>
-        <div class="nav on" onclick="goHome()">
+        <div class="nav on" id="navHome" onclick="goHome()">
           <span class="ic">◧</span
           ><span class="nav-label">Global Overview</span>
         </div>
-        <div class="grp">Plants</div>
-        <div id="plantNav"></div>
+        <div class="grp plants-grp">
+          <span>Plants</span><span class="grp-count" id="plantCount"></span>
+        </div>
+        <div class="ptree-search">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5 17 17"></path></svg>
+          <input
+            id="plantSearch"
+            type="search"
+            placeholder="Search plants"
+            aria-label="Search plants by name, code, country or region"
+            autocomplete="off"
+          />
+          <button type="button" class="ptree-clear" id="plantSearchClear" aria-label="Clear search" hidden>×</button>
+        </div>
+        <div id="plantNav" class="ptree"></div>
         <div class="grp" style="margin-top: 6px">Views</div>
         <div class="nav">
           <span class="ic">▣</span><span class="nav-label">Assets</span>
@@ -2598,8 +3439,8 @@
           <span class="ic">◭</span><span class="nav-label">Alerts</span>
         </div>
         <div class="foot">
-          <div class="nav">
-            <span class="ic">⚙</span><span class="nav-label">Configration</span>
+          <div class="nav" id="navConfig" onclick="openConfig()">
+            <span class="ic">⚙</span><span class="nav-label">Configuration</span>
           </div>
           <div class="nav">
             <span class="ic">⏻</span><span class="nav-label">Logout</span>
@@ -3314,6 +4155,43 @@
             </div>
           </div>
         </div>
+
+        <!-- PAGE 3: CONFIGURATION (admin) -->
+        <div class="content page" id="pgConfig">
+          <div class="cfg-head">
+            <div>
+              <h1>Configuration</h1>
+              <p>
+                Set up plants, the assets inside each plant, and where every KPI
+                gets its data.
+              </p>
+            </div>
+            <button type="button" class="cfg-btn primary" data-act="add-plant">
+              Add plant
+            </button>
+          </div>
+          <div class="cfg-layout">
+            <aside class="cfg-list" aria-label="Plants">
+              <div class="cfg-list-search">
+                <input
+                  id="cfgPlantSearch"
+                  class="cfg-input"
+                  type="search"
+                  placeholder="Filter plants"
+                  aria-label="Filter plants"
+                  autocomplete="off"
+                />
+              </div>
+              <div id="cfgPlantList"></div>
+            </aside>
+            <section class="cfg-detail" id="cfgDetail" aria-live="polite"></section>
+          </div>
+          <div class="cfg-foot">
+            <button type="button" class="cfg-btn sm danger" data-act="reset">
+              Reset configuration
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -3406,6 +4284,10 @@
         </svg>
       </div>
     </div>
+
+    <!-- CONFIGURATION DIALOG + TOAST -->
+    <div class="cfg-modal" id="cfgModal"></div>
+    <div class="cfg-toast" id="cfgToast" role="status" aria-live="polite"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -4310,28 +5192,6 @@
       });
 
       /* ---------- SIDEBAR + NODES ---------- */
-      function initNav() {
-        let nav = '<div class="plant-tree"><div class="plant-root">Plant</div>';
-        const regions = {};
-        for (const hac in PLANTS) {
-          const p = PLANTS[hac];
-          const region = p.region || "AMEA";
-          (regions[region] ||= []).push({ hac, p });
-        }
-        for (const region in regions) {
-          nav += `<div class="region-node"><div class="region-label">${region}</div>`;
-          for (const { hac, p } of regions[region]) {
-            nav += `<div class="plant-item" onclick="selectPlant('${hac}')">
-        <span class="plant-path"><span class="plant-branch">↳</span>${p.name}</span>
-        <span class="st" style="background:${STCOL[p.st]}"></span>
-      </div>`;
-          }
-          nav += "</div>";
-        }
-        nav += "</div>";
-        document.getElementById("plantNav").innerHTML = nav;
-      }
-
       /* ---------- 3D GLOBE (Three.js) ---------- */
       let globe = null;
       function initGlobe() {
@@ -4714,12 +5574,16 @@ h1{font-size:30px;margin:0 0 7px}
         document.getElementById("topTitle").innerHTML =
           'Global Overview <span class="sub">· Smart Operations</span>';
         restorePlantNetworkView();
+        navActiveHac = null;
+        syncNav();
         window.scrollTo(0, 0);
       }
 
       function selectPlant(hac) {
         // opens the KPI drawer (level 2)
         curHac = hac;
+        navActiveHac = hac;
+        syncNav();
         const p = PLANTS[hac];
         const meta = pmeta(hac);
         document.getElementById("drName").textContent = p.name;
@@ -4730,7 +5594,7 @@ h1{font-size:30px;margin:0 0 7px}
         document.getElementById("drCountry").textContent = p.country;
         document.getElementById("drManager").textContent = meta.manager;
         document.getElementById("drAssetCount").textContent =
-          p.assetCount || 29;
+          p.assetCount == null ? 0 : p.assetCount;
         document.getElementById("drPillars").innerHTML = pillarsHTML(p);
         setPlantImageVisibility(hac);
         document.getElementById("drawer").classList.add("open");
@@ -4738,42 +5602,12 @@ h1{font-size:30px;margin:0 0 7px}
       function togglePillar(el) {
         el.parentElement.classList.toggle("open");
       }
-      function pillarsHTML(p) {
-        const crit = [...p.assets].sort((a, b) => b.risk - a.risk)[0];
-        return `
-  <div class="pillar open"><div class="pillar-h" onclick="togglePillar(this)"><div class="pt"><i style="background:var(--teal)"></i>Production</div>
-    <div class="badge" style="background:rgba(45,212,191,.14);color:var(--teal)">Stable</div></div>
-    <div class="pillar-b">
-      <div class="mrow"><span class="mk">Kiln MTBF (13wk)</span><span class="mv">218 <small>h</small></span></div>
-      <div class="mrow"><span class="mk">PRI (Kiln / Mills)</span><span class="mv">100.2 / 99.1</span></div>
-      <div class="mrow"><span class="mk">Cement Silo Fill</span><span class="mv">67<small>%</small></span></div>
-      <div class="mrow"><span class="mk">Stock Days</span><span class="mv">4.2 <small>d</small></span></div>
-      <div class="mrow"><span class="mk">Shipping</span><span class="mv">94<small>% of target</small></span></div></div></div>
-  <div class="pillar open"><div class="pillar-h" onclick="togglePillar(this)"><div class="pt"><i style="background:var(--amber)"></i>Maintenance</div>
-    <div class="badge" style="background:rgba(240,180,76,.16);color:var(--amber)">Watch</div></div>
-    <div class="pillar-b">
-      <div class="mrow"><span class="mk">M-Predict Risk</span><span class="mv" style="color:var(--amber)">84</span></div>
-      <div class="mrow"><span class="mk">Active Alerts</span><span class="mv">3</span></div>
-      <div class="mrow"><span class="mk">Critical Asset</span><span class="mv">${crit.id}</span></div>
-      <div class="mrow"><span class="mk">NAI</span><span class="mv">91<small>%</small></span></div>
-      <div class="mrow"><span class="mk">Sensor Coverage</span><span class="mv">78<small>%</small></span></div></div></div>
-  <div class="pillar open"><div class="pillar-h" onclick="togglePillar(this)"><div class="pt"><i style="background:var(--blue)"></i>Energy</div>
-    <div class="badge" style="background:rgba(76,143,216,.14);color:var(--blue)">Stable</div></div>
-    <div class="pillar-b">
-      <div class="mrow"><span class="mk">SEC</span><span class="mv">51.8 <small>kWh/t</small></span></div>
-      <div class="mrow"><span class="mk">Thermal Energy</span><span class="mv">710 <small>kcal/kg</small></span></div>
-      <div class="mrow"><span class="mk">Cost Deviation</span><span class="mv">-2.1<small>%</small></span></div>
-      <div class="mrow"><span class="mk">Cost Impact</span><span class="mv">10.5k <small>CHF/mo</small></span></div></div></div>
-  <div class="pillar open"><div class="pillar-h" onclick="togglePillar(this)"><div class="pt"><i style="background:var(--violet)"></i>Sustainability</div>
-    <div class="badge" style="background:rgba(155,140,255,.14);color:var(--violet)">Stable</div></div>
-    <div class="pillar-b">
-      <div class="mrow"><span class="mk">TSR</span><span class="mv">60<small>%</small></span></div>
-      <div class="mrow"><span class="mk">CO₂ Intensity</span><span class="mv">570 <small>kg/t</small></span></div>
-      <div class="mrow"><span class="mk">Clinker Factor</span><span class="mv">0.72</span></div>
-      <div class="mrow"><span class="mk">Legal Compliance</span><span class="mv" style="color:var(--teal)">Compliant</span></div></div></div>`;
-      }
       function closeDrawer() {
         document.getElementById("drawer").classList.remove("open");
+        if (!document.getElementById("pgPlant").classList.contains("on")) {
+          navActiveHac = null;
+          syncNav();
+        }
       }
 
       function openFull() {
@@ -4796,6 +5630,8 @@ h1{font-size:30px;margin:0 0 7px}
           .querySelectorAll(".page")
           .forEach((x) => x.classList.remove("on"));
         document.getElementById("pgPlant").classList.add("on");
+        navActiveHac = curHac;
+        syncNav();
         // DEFAULT to plant map tab
         document
           .querySelectorAll(".pp-tab")
@@ -4855,18 +5691,23 @@ h1{font-size:30px;margin:0 0 7px}
               (a.id.toLowerCase().includes(q) ||
                 a.machine.toLowerCase().includes(q)),
           )
-          .sort((a, b) => b.risk - a.risk)
+          .sort((a, b) => riskOf(b) - riskOf(a))
           .forEach((a) => {
             rows += `<div class="arow" onclick="openAsset('${a.id}')"><div><div class="aid">${a.id}</div><div class="amach">${a.machine}</div></div>
-      <div class="atype">${a.abbr}</div><div class="arisk" style="color:${STCOL[a.status]}">${a.risk}</div></div>`;
+      <div class="atype">${a.abbr}</div><div class="arisk" style="color:${a.risk == null ? "var(--ink-3)" : STCOL[a.status]}">${a.risk == null ? "\u2014" : a.risk}</div></div>`;
           });
         document.getElementById("assetTable").innerHTML =
           rows ||
-          '<div style="padding:20px;color:var(--ink-3);font-size:12px">No assets match.</div>';
+          (p.assets.length
+            ? '<div style="padding:20px;color:var(--ink-3);font-size:12px">No assets match.</div>'
+            : emptyAssetsHTML(p));
       }
       function buildTopRisky() {
         const p = PLANTS[curHac];
-        const top = [...p.assets].sort((a, b) => b.risk - a.risk).slice(0, 6);
+        const top = [...p.assets]
+          .filter((a) => a.risk != null)
+          .sort((a, b) => riskOf(b) - riskOf(a))
+          .slice(0, 6);
         let h = "";
         top.forEach((a) => {
           h += `<div class="fbtn" onclick="openAsset('${a.id}')"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${STCOL[a.status]};margin-right:6px"></span>${a.id} · ${a.risk}</div>`;
@@ -4904,6 +5745,10 @@ h1{font-size:30px;margin:0 0 7px}
           buildIsland();
           return;
         }
+        if (!p.assets.length) {
+          stage.innerHTML = emptyAssetsHTML(p);
+          return;
+        }
         // ---- process schematic (default for other plants) ----
         stage.innerHTML =
           '<svg class="pmap" id="pmapSvg" viewBox="0 0 660 480" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg><div class="pmap-hint">Plant process layout \u00b7 hover to highlight \u00b7 click a machine or a table row</div>';
@@ -4923,7 +5768,7 @@ h1{font-size:30px;margin:0 0 7px}
         present.forEach((t, i) => {
           const cand = p.assets
             .filter((a) => a.abbr === t)
-            .sort((a, b) => b.risk - a.risk)[0];
+            .sort((a, b) => riskOf(b) - riskOf(a))[0];
           const x = startX + i * gapX;
           const y = baseY - (i % 2) * 44;
           const size = t === "KILN" ? 58 : t === "VRM" || t === "BM" ? 50 : 42;
@@ -5012,8 +5857,10 @@ h1{font-size:30px;margin:0 0 7px}
       }
       function openAsset(id) {
         const p = PLANTS[curHac];
-        const a = p.assets.find((x) => x.id === id);
-        if (!a) return;
+        const a0 = p.assets.find((x) => x.id === id);
+        if (!a0) return;
+        const noData = a0.risk == null;
+        const a = noData ? Object.assign({}, a0, { risk: 0, life: 0 }) : a0;
         document.getElementById("apType").textContent =
           TYPE_LABEL[a.abbr] || a.abbr;
         document.getElementById("apName").textContent = a.id;
@@ -5022,7 +5869,7 @@ h1{font-size:30px;margin:0 0 7px}
         document.getElementById("apGauge").innerHTML = ring(
           a.risk,
           HEALTH_BLUE,
-          a.risk,
+          noData ? "\u2014" : a.risk,
           "M-Predict Risk",
         );
         document.getElementById("apProd").innerHTML =
@@ -5039,7 +5886,7 @@ h1{font-size:30px;margin:0 0 7px}
         document.getElementById("apAlerts").textContent =
           a.status === "crit" ? 2 : a.status === "warn" ? 1 : 0;
         document.getElementById("apLife").innerHTML =
-          a.life + "<small>%</small>";
+          noData ? "\u2014" : a.life + "<small>%</small>";
         let d = "";
         for (let i = 0; i < 12; i++) {
           const yy = 45 + Math.sin(i * 0.9 + a.risk) * 18 - i * 1.2;
@@ -5052,6 +5899,1204 @@ h1{font-size:30px;margin:0 0 7px}
       function closeAsset() {
         document.getElementById("apanel").classList.remove("open");
       }
+
+      /* =====================================================================
+         SHARED HELPERS
+         ===================================================================== */
+      const $id = (i) => document.getElementById(i);
+      const esc = (s) =>
+        String(s == null ? "" : s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const riskOf = (a) => (a.risk == null ? -1 : a.risk);
+      const plural = (n, one, many) => `${n} ${n === 1 ? one : many || one + "s"}`;
+
+      /* =====================================================================
+         CONFIGURATION DATA: regions, countries, pillars, source types
+         ===================================================================== */
+      const CFG_KEY = "hpod-config-v1";
+      // Plant, country and asset names end up in many existing views, so they
+      // are limited to letters, numbers, spaces and a few separators.
+      const CFG_NAME_RE = /^[\p{L}\p{N}][\p{L}\p{N} .\-\/()\u2019]*$/u;
+      const CFG_NAME_MSG =
+        "Use letters, numbers, spaces and . - / ( ) only.";
+
+      // Country centre points [latitude, longitude], used to place new plants.
+      const CFG_REGIONS = {
+        AMEA: {
+          Algeria: [28.0, 1.7],
+          Australia: [-25.3, 134.5],
+          Bangladesh: [23.7, 90.4],
+          Cameroon: [5.7, 12.7],
+          China: [35.9, 104.2],
+          "Côte d\u2019Ivoire": [7.5, -5.5],
+          Egypt: [26.8, 30.8],
+          India: [22.0, 79.0],
+          Indonesia: [-2.5, 118.0],
+          Iraq: [33.2, 43.7],
+          Kenya: [0.0, 37.9],
+          Malaysia: [4.2, 102.0],
+          Morocco: [31.8, -7.1],
+          "New Zealand": [-41.0, 174.0],
+          Nigeria: [9.1, 8.7],
+          Philippines: [12.9, 122.8],
+          "Saudi Arabia": [23.9, 45.1],
+          "South Africa": [-29.0, 24.0],
+          "Sri Lanka": [7.9, 80.8],
+          Tanzania: [-6.4, 34.9],
+          Uganda: [1.4, 32.3],
+          "United Arab Emirates": [24.3, 54.3],
+          Vietnam: [14.1, 108.3],
+          Zambia: [-13.1, 27.8],
+        },
+        Europe: {
+          Austria: [47.5, 14.6],
+          Azerbaijan: [40.1, 47.6],
+          Belgium: [50.6, 4.7],
+          Bulgaria: [42.7, 25.5],
+          Croatia: [45.1, 15.2],
+          Czechia: [49.8, 15.5],
+          Denmark: [56.0, 10.0],
+          France: [46.6, 2.2],
+          Germany: [51.2, 10.4],
+          Greece: [39.1, 22.0],
+          Hungary: [47.2, 19.5],
+          Ireland: [53.4, -8.2],
+          Italy: [42.8, 12.6],
+          Netherlands: [52.2, 5.3],
+          Poland: [52.1, 19.4],
+          Romania: [45.9, 25.0],
+          Serbia: [44.0, 20.9],
+          Slovakia: [48.7, 19.7],
+          Slovenia: [46.1, 14.8],
+          Spain: [40.2, -3.7],
+          Switzerland: [46.8, 8.2],
+          Ukraine: [49.0, 31.4],
+          "United Kingdom": [54.0, -2.5],
+        },
+        "Latin America": {
+          Argentina: [-34.0, -64.0],
+          Brazil: [-10.8, -52.9],
+          Chile: [-35.7, -71.5],
+          Colombia: [4.6, -74.1],
+          "Costa Rica": [9.7, -83.8],
+          "Dominican Republic": [18.7, -70.2],
+          Ecuador: [-1.8, -78.2],
+          "El Salvador": [13.8, -88.9],
+          Guatemala: [15.8, -90.2],
+          Honduras: [15.2, -86.2],
+          Mexico: [23.6, -102.6],
+          Nicaragua: [12.9, -85.2],
+          Panama: [8.5, -80.8],
+          Peru: [-9.2, -75.0],
+          Uruguay: [-32.5, -55.8],
+        },
+        "North America": {
+          Canada: [56.1, -106.3],
+          "United States": [39.8, -98.6],
+        },
+      };
+      function cfgRegions() {
+        const set = new Set(Object.keys(CFG_REGIONS));
+        Object.values(PLANTS).forEach((p) => p.region && set.add(p.region));
+        return [...set];
+      }
+      function cfgRegionRank(r) {
+        const i = cfgRegions().indexOf(r);
+        return i < 0 ? 999 : i;
+      }
+      function cfgCountryList(region) {
+        const set = new Set(Object.keys(CFG_REGIONS[region] || {}));
+        Object.values(PLANTS).forEach(
+          (p) => p.region === region && p.country && set.add(p.country),
+        );
+        return [...set].sort((a, b) => a.localeCompare(b));
+      }
+      function cfgCountryLL(region, country) {
+        return (CFG_REGIONS[region] || {})[country] || null;
+      }
+
+      const CFG_PILLARS = [
+        { id: "Production", color: "var(--teal)", badge: ["Stable", "rgba(45,212,191,.14)", "var(--teal)"] },
+        { id: "Maintenance", color: "var(--amber)", badge: ["Watch", "rgba(240,180,76,.16)", "var(--amber)"] },
+        { id: "Energy", color: "var(--blue)", badge: ["Stable", "rgba(76,143,216,.14)", "var(--blue)"] },
+        { id: "Sustainability", color: "var(--violet)", badge: ["Stable", "rgba(155,140,255,.14)", "var(--violet)"] },
+      ];
+      // The plant KPIs the dashboard already shows (same values as before).
+      const CFG_SEED_PLANT_KPIS = [
+        ["Production", "Kiln MTBF (13wk)", "h", "218"],
+        ["Production", "PRI (Kiln / Mills)", "", "100.2 / 99.1"],
+        ["Production", "Cement Silo Fill", "%", "67"],
+        ["Production", "Stock Days", "d", "4.2"],
+        ["Production", "Shipping", "% of target", "94"],
+        ["Maintenance", "M-Predict Risk", "", "84", "amber"],
+        ["Maintenance", "Active Alerts", "", "3"],
+        ["Maintenance", "Critical Asset", "", "@crit"],
+        ["Maintenance", "NAI", "%", "91"],
+        ["Maintenance", "Sensor Coverage", "%", "78"],
+        ["Energy", "SEC", "kWh/t", "51.8"],
+        ["Energy", "Thermal Energy", "kcal/kg", "710"],
+        ["Energy", "Cost Deviation", "%", "-2.1"],
+        ["Energy", "Cost Impact", "CHF/mo", "10.5k"],
+        ["Sustainability", "TSR", "%", "60"],
+        ["Sustainability", "CO\u2082 Intensity", "kg/t", "570"],
+        ["Sustainability", "Clinker Factor", "", "0.72"],
+        ["Sustainability", "Legal Compliance", "", "Compliant", "teal"],
+      ].map(([pillar, name, unit, value, tone]) => ({ pillar, name, unit, value, tone }));
+
+      const CFG_SOURCES = {
+        historian: { label: "Historian tag", ref: "Tag name", hint: "e.g. K461.MTBF.13WK" },
+        sql: { label: "SQL query or view", ref: "Query or view name", hint: "e.g. vw_plant_kpi_daily" },
+        api: { label: "REST API", ref: "Endpoint URL", hint: "https://" },
+        erp: { label: "SAP / ERP report", ref: "Report, table or transaction", hint: "" },
+        calc: { label: "Calculated from other KPIs", ref: "Formula", hint: "e.g. {Kiln run hours} / {Kiln stops}" },
+        manual: { label: "Manual entry", ref: null },
+        demo: { label: "Not connected (demo value)", ref: null },
+      };
+      const CFG_REFRESH = ["1 minute", "5 minutes", "15 minutes", "Hourly", "Daily", "On demand"];
+
+      // Suggested KPIs when an asset is added. All editable afterwards.
+      const CFG_ASSET_COMMON = [
+        { name: "Risk score", unit: "0\u2013100" },
+        { name: "Remaining life", unit: "%" },
+      ];
+      const CFG_ASSET_EXTRA = {
+        KILN: [["Shell temperature", "\u00b0C"], ["Main drive current", "A"]],
+        VRM: [["Vibration", "mm/s"], ["Main drive power", "kW"]],
+        BM: [["Vibration", "mm/s"], ["Main drive power", "kW"]],
+        CLg: [["Undergrate pressure", "mbar"], ["Grate drive current", "A"]],
+        CR: [["Motor current", "A"], ["Vibration", "mm/s"]],
+        FAN: [["Vibration", "mm/s"], ["Bearing temperature", "\u00b0C"]],
+        BE: [["Motor current", "A"], ["Bearing temperature", "\u00b0C"]],
+        BC: [["Motor current", "A"], ["Belt speed", "m/s"]],
+        CP: [["Discharge pressure", "bar"], ["Motor current", "A"]],
+        CAM: [["Online status", ""], ["Uptime", "%"]],
+      };
+      function cfgSuggest(abbr) {
+        return CFG_ASSET_COMMON.concat(
+          (CFG_ASSET_EXTRA[abbr] || []).map(([name, unit]) => ({ name, unit })),
+        );
+      }
+
+      /* =====================================================================
+         CONFIGURATION STORE (saved in this browser)
+         ===================================================================== */
+      const CFG_BASE_TYPES = Object.keys(TYPE_LABEL).map((abbr) => ({
+        abbr,
+        name: TYPE_LABEL[abbr],
+      }));
+      const CFG = {
+        library: [], // asset types created by the admin
+        customPlants: {}, // plants created by the admin (full objects)
+        addedAssets: {}, // assets added to built-in plants
+        plantKpis: {}, // hac -> [kpi]
+        assetKpis: {}, // asset id -> [kpi]
+      };
+      const cfgUid = () =>
+        "k" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const cfgUnset = (k) => !k.source || !k.source.type || k.source.type === "unset";
+
+      function cfgSave() {
+        try {
+          localStorage.setItem(CFG_KEY, JSON.stringify(CFG));
+        } catch (e) {}
+      }
+      function cfgRegisterType(t) {
+        TYPE_LABEL[t.abbr] = t.name;
+        if (!PROC_ORDER.includes(t.abbr)) PROC_ORDER.push(t.abbr);
+        TYPE_ABBR_SHORT[t.abbr] = t.abbr.charAt(0).toUpperCase();
+      }
+      function cfgLibraryList() {
+        return CFG_BASE_TYPES.concat(CFG.library).sort((a, b) =>
+          a.name.localeCompare(b.name),
+        );
+      }
+      function cfgRecount(p) {
+        const counts = {};
+        Object.keys(p.counts || {}).forEach((k) => (counts[k] = 0));
+        p.assets.forEach((a) => (counts[a.abbr] = (counts[a.abbr] || 0) + 1));
+        Object.keys(counts).forEach((k) => {
+          if (!counts[k]) delete counts[k];
+        });
+        p.counts = counts;
+        p.assetCount = p.assets.length;
+      }
+      function cfgLoad() {
+        let saved = null;
+        try {
+          saved = JSON.parse(localStorage.getItem(CFG_KEY) || "null");
+        } catch (e) {}
+        if (!saved) return;
+        CFG.library = saved.library || [];
+        CFG.plantKpis = saved.plantKpis || {};
+        CFG.assetKpis = saved.assetKpis || {};
+        CFG.customPlants = saved.customPlants || {};
+        CFG.addedAssets = saved.addedAssets || {};
+        CFG.library.forEach(cfgRegisterType);
+        Object.values(CFG.customPlants).forEach((p) => {
+          if (!PLANTS[p.hac]) PLANTS[p.hac] = p;
+        });
+        Object.entries(CFG.addedAssets).forEach(([hac, list]) => {
+          const p = PLANTS[hac];
+          if (!p) return;
+          list.forEach((a) => p.assets.push(a));
+          cfgRecount(p);
+        });
+      }
+      function cfgPlantKpis(hac) {
+        if (!CFG.plantKpis[hac]) {
+          const builtin = PLANTS[hac] && !PLANTS[hac].custom;
+          CFG.plantKpis[hac] = builtin
+            ? CFG_SEED_PLANT_KPIS.map((k) => ({
+                ...k,
+                id: cfgUid(),
+                source: { type: "demo", ref: "", refresh: "" },
+              }))
+            : [];
+        }
+        return CFG.plantKpis[hac];
+      }
+      function cfgAssetKpis(a) {
+        if (!CFG.assetKpis[a.id]) {
+          CFG.assetKpis[a.id] = cfgSuggest(a.abbr).map((t) => ({
+            id: cfgUid(),
+            name: t.name,
+            unit: t.unit,
+            source: { type: a.custom ? "unset" : "demo", ref: "", refresh: "" },
+          }));
+        }
+        return CFG.assetKpis[a.id];
+      }
+      function cfgNeedCount(p) {
+        let n = cfgPlantKpis(p.hac).filter(cfgUnset).length;
+        p.assets.forEach((a) => {
+          const l = CFG.assetKpis[a.id];
+          if (l) n += l.filter(cfgUnset).length;
+        });
+        return n;
+      }
+
+      /* =====================================================================
+         DASHBOARD: plant KPI drawer now reads the configured KPIs
+         ===================================================================== */
+      function cfgValueHTML(k, crit) {
+        let v = k.value;
+        if (v === "@crit") v = crit ? crit.id : null;
+        if (v == null || v === "")
+          return '<span class="mv" title="No live value yet">\u2014</span>';
+        const u = k.unit
+          ? (k.unit.charAt(0) === "%" ? "" : " ") + "<small>" + esc(k.unit) + "</small>"
+          : "";
+        const style =
+          k.tone === "amber"
+            ? ' style="color:var(--amber)"'
+            : k.tone === "teal"
+              ? ' style="color:var(--teal)"'
+              : "";
+        return `<span class="mv"${style}>${esc(v)}${u}</span>`;
+      }
+      function pillarsHTML(p) {
+        const list = cfgPlantKpis(p.hac);
+        if (!list.length)
+          return `<div class="dr-empty">No KPIs are set up for ${esc(p.name)} yet. <button type="button" class="cfg-link" onclick="closeDrawer();openConfig('${p.hac}')">Set up KPIs in Configuration</button></div>`;
+        const crit = [...p.assets]
+          .filter((a) => a.risk != null)
+          .sort((a, b) => riskOf(b) - riskOf(a))[0];
+        return CFG_PILLARS.map((pl) => {
+          const items = list.filter((k) => k.pillar === pl.id);
+          if (!items.length) return "";
+          const has = items.some((k) => k.value != null && k.value !== "");
+          const b = has
+            ? pl.badge
+            : ["No data", "rgba(155,176,196,.14)", "var(--ink-3)"];
+          const rows = items
+            .map(
+              (k) =>
+                `<div class="mrow"><span class="mk">${esc(k.name)}</span>${cfgValueHTML(k, crit)}</div>`,
+            )
+            .join("");
+          return `<div class="pillar open"><div class="pillar-h" onclick="togglePillar(this)"><div class="pt"><i style="background:${pl.color}"></i>${pl.id}</div>
+    <div class="badge" style="background:${b[1]};color:${b[2]}">${b[0]}</div></div>
+    <div class="pillar-b">${rows}</div></div>`;
+        }).join("");
+      }
+      function emptyAssetsHTML(p) {
+        return `<div class="empty-note">No assets in ${esc(p.name)} yet. <button type="button" class="cfg-link" onclick="openConfig('${p.hac}')">Add assets in Configuration</button></div>`;
+      }
+
+      /* =====================================================================
+         MAP: place plants on the supplied world-map artwork from lat / lon
+         ===================================================================== */
+      function cfgMapXY(lat, lon) {
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const phi = (clamp(lat, -70, 78) * Math.PI) / 180;
+        const merc = Math.log(Math.tan(Math.PI / 4 + phi / 2));
+        return {
+          x: clamp(42.55 + 0.3672 * lon, 8, 92),
+          y: clamp(((310 - 234.7 * merc) / 482) * 100, 9, 91),
+        };
+      }
+      function cfgPlaceOnMap(p, used) {
+        const base = cfgMapXY(p.lat, p.lon);
+        const offsets = [[0, 0], [0, 12], [0, -12], [13, 0], [-13, 0], [13, 12], [-13, 12], [13, -12], [-13, -12], [0, 24], [0, -24]];
+        for (const [dx, dy] of offsets) {
+          const c = { x: base.x + dx, y: base.y + dy };
+          if (c.x < 8 || c.x > 92 || c.y < 8 || c.y > 92) continue;
+          if (!used.some((u) => Math.abs(u.x - c.x) < 12.5 && Math.abs(u.y - c.y) < 11.5)) {
+            used.push(c);
+            return c;
+          }
+        }
+        used.push(base);
+        return base;
+      }
+
+      /* =====================================================================
+         SIDEBAR: Region > Country > Plant tree with search
+         ===================================================================== */
+      let navQuery = "";
+      let navActiveHac = null;
+      const navCollapsed = new Set();
+      function initNav() {
+        const host = $id("plantNav");
+        if (!host) return;
+        // keep keyboard focus on the same row after a re-render
+        const f = document.activeElement;
+        const focusSel =
+          f && host.contains(f) && (f.dataset.toggle || f.dataset.hac)
+            ? f.dataset.toggle
+              ? `[data-toggle="${f.dataset.toggle}"]`
+              : `[data-hac="${f.dataset.hac}"]`
+            : null;
+
+        const q = navQuery.trim().toLowerCase();
+        const all = Object.values(PLANTS);
+        const tree = {};
+        let shown = 0;
+        all.forEach((p) => {
+          const hit =
+            !q ||
+            [p.name, p.hac, p.country, p.region].some((v) =>
+              String(v || "").toLowerCase().includes(q),
+            );
+          if (!hit) return;
+          shown++;
+          ((tree[p.region || "Other"] ||= {})[p.country || "Other"] ||= []).push(p);
+        });
+        $id("plantCount").textContent = q ? `${shown} of ${all.length}` : String(all.length);
+        $id("plantSearchClear").hidden = !navQuery;
+
+        if (!shown) {
+          host.innerHTML = all.length
+            ? `<div class="pt-empty">No plants match \u201c${esc(navQuery.trim())}\u201d.</div>`
+            : '<div class="pt-empty">No plants yet. Add one in Configuration.</div>';
+          return;
+        }
+        const stName = { ok: "Optimal", warn: "Watch", crit: "Critical" };
+        let h = "";
+        Object.keys(tree)
+          .sort((a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b))
+          .forEach((r) => {
+            const rKey = "r:" + r;
+            const rOpen = !navCollapsed.has(rKey);
+            const n = Object.values(tree[r]).reduce((s, l) => s + l.length, 0);
+            h += `<div><button type="button" class="pt-row pt-region" data-toggle="${esc(rKey)}" aria-expanded="${rOpen}"><span class="pt-chev" aria-hidden="true">\u25be</span><span class="pt-label">${esc(r)}</span><span class="pt-n">${n}</span></button>`;
+            if (rOpen) {
+              h += '<div class="pt-kids">';
+              Object.keys(tree[r])
+                .sort((a, b) => a.localeCompare(b))
+                .forEach((c) => {
+                  const cKey = "c:" + r + "|" + c;
+                  const cOpen = !navCollapsed.has(cKey);
+                  const list = tree[r][c].sort((a, b) => a.name.localeCompare(b.name));
+                  h += `<div><button type="button" class="pt-row pt-country" data-toggle="${esc(cKey)}" aria-expanded="${cOpen}"><span class="pt-chev" aria-hidden="true">\u25be</span><span class="pt-label">${esc(c)}</span><span class="pt-n">${list.length}</span></button>`;
+                  if (cOpen) {
+                    h += '<div class="pt-kids">';
+                    list.forEach((p) => {
+                      const on = p.hac === navActiveHac;
+                      h += `<button type="button" class="pt-row pt-plant${on ? " on" : ""}" data-hac="${esc(p.hac)}" title="${esc(p.name)}"${on ? ' aria-current="true"' : ""}><span class="plant-branch" aria-hidden="true">\u21b3</span><span class="pt-label">${esc(p.name)}</span><span class="pt-dot" style="background:${STCOL[p.st] || STCOL.ok}" title="${stName[p.st] || ""}"></span></button>`;
+                    });
+                    h += "</div>";
+                  }
+                  h += "</div>";
+                });
+              h += "</div>";
+            }
+            h += "</div>";
+          });
+        host.innerHTML = h;
+        if (focusSel) {
+          const el = host.querySelector(focusSel);
+          if (el) el.focus();
+        }
+      }
+      $id("plantNav").addEventListener("click", (e) => {
+        const t = e.target.closest("[data-toggle],[data-hac]");
+        if (!t) return;
+        if (t.dataset.toggle) {
+          const k = t.dataset.toggle;
+          navCollapsed.has(k) ? navCollapsed.delete(k) : navCollapsed.add(k);
+          initNav();
+        } else selectPlant(t.dataset.hac);
+      });
+      (function bindPlantSearch() {
+        const input = $id("plantSearch");
+        const reset = () => {
+          input.value = "";
+          navQuery = "";
+          navCollapsed.clear();
+          initNav();
+        };
+        input.addEventListener("input", () => {
+          navQuery = input.value;
+          navCollapsed.clear();
+          initNav();
+        });
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && input.value) {
+            e.stopPropagation();
+            reset();
+          }
+        });
+        $id("plantSearchClear").addEventListener("click", () => {
+          reset();
+          input.focus();
+        });
+      })();
+      function syncNav() {
+        const page = document.querySelector(".page.on");
+        $id("navHome").classList.toggle("on", !!page && page.id === "pgOverview");
+        $id("navConfig").classList.toggle("on", !!page && page.id === "pgConfig");
+        initNav();
+      }
+      // Anything derived from PLANTS is refreshed here after a config change.
+      function plantsChanged() {
+        initNav();
+        initPlantNetworkMap();
+        const pm = $id("pmSearch");
+        if (pm && pm.value && window.filterPlantMap) window.filterPlantMap(pm.value);
+        if (ssGlobe) {
+          try {
+            ssGlobe.renderer.dispose();
+          } catch (e) {}
+          ssGlobe = null;
+        }
+        if ($id("pgConfig").classList.contains("on")) renderConfig();
+      }
+
+      /* =====================================================================
+         CONFIGURATION PAGE
+         ===================================================================== */
+      const cfgState = { hac: null, tab: "assets", plantQuery: "", assetQuery: "", assetType: "ALL", open: new Set() };
+      const cfgFirstHac = () => {
+        const l = Object.values(PLANTS).sort(
+          (a, b) => cfgRegionRank(a.region) - cfgRegionRank(b.region) || a.name.localeCompare(b.name),
+        );
+        return l.length ? l[0].hac : null;
+      };
+      function openConfig(hac) {
+        $id("drawer").classList.remove("open");
+        $id("apanel").classList.remove("open");
+        document.querySelectorAll(".page").forEach((p) => p.classList.remove("on"));
+        $id("pgConfig").classList.add("on");
+        $id("topTitle").textContent = "Configuration";
+        navActiveHac = null;
+        if (hac && PLANTS[hac]) cfgState.hac = hac;
+        else if (!PLANTS[cfgState.hac]) cfgState.hac = cfgFirstHac();
+        syncNav();
+        renderConfig();
+        window.scrollTo(0, 0);
+      }
+      function renderConfig() {
+        renderCfgList();
+        renderCfgDetail();
+      }
+
+      function renderCfgList() {
+        const q = cfgState.plantQuery.trim().toLowerCase();
+        const groups = {};
+        Object.values(PLANTS).forEach((p) => {
+          if (q && ![p.name, p.hac, p.country, p.region].some((v) => String(v).toLowerCase().includes(q))) return;
+          (groups[p.region || "Other"] ||= []).push(p);
+        });
+        let h = "";
+        Object.keys(groups)
+          .sort((a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b))
+          .forEach((r) => {
+            h += `<div class="cfg-region">${esc(r)}</div>`;
+            groups[r]
+              .sort((a, b) => a.country.localeCompare(b.country) || a.name.localeCompare(b.name))
+              .forEach((p) => {
+                const on = p.hac === cfgState.hac;
+                h += `<button type="button" class="cfg-plant${on ? " on" : ""}" data-act="pick-plant" data-hac="${esc(p.hac)}"${on ? ' aria-current="true"' : ""}>
+                  <span class="cfg-plant-main"><b>${esc(p.name)}</b><small>${esc(p.country)}</small></span>
+                  <span class="cfg-plant-side"><span class="cfg-code">${esc(p.hac)}</span><small>${plural(p.assets.length, "asset")}</small></span></button>`;
+              });
+          });
+        $id("cfgPlantList").innerHTML =
+          h ||
+          `<div class="cfg-list-empty">${
+            q ? `No plants match \u201c${esc(cfgState.plantQuery.trim())}\u201d.` : "No plants yet. Use Add plant to create the first one."
+          }</div>`;
+      }
+
+      function renderCfgDetail() {
+        const host = $id("cfgDetail");
+        const p = PLANTS[cfgState.hac];
+        if (!p) {
+          host.innerHTML = `<div class="cfg-empty"><b>No plant selected</b><p>Add a plant, then set up its assets and KPIs.</p><button type="button" class="cfg-btn primary" data-act="add-plant">Add plant</button></div>`;
+          return;
+        }
+        const pk = cfgPlantKpis(p.hac);
+        const need = cfgNeedCount(p);
+        const tab = cfgState.tab;
+        host.innerHTML = `
+          <div class="cfg-dhead">
+            <div class="cfg-path">${esc(p.region)} \u203a ${esc(p.country)}</div>
+            <div class="cfg-dtitle">
+              <h2>${esc(p.name)}<span class="cfg-code">${esc(p.hac)}</span></h2>
+              <div class="cfg-dactions">${
+                p.custom
+                  ? '<button type="button" class="cfg-btn sm" data-act="edit-plant">Edit details</button><button type="button" class="cfg-btn sm danger" data-act="delete-plant">Remove plant</button>'
+                  : ""
+              }</div>
+            </div>
+            <div class="cfg-summary">
+              <span><b>${p.assets.length}</b> ${p.assets.length === 1 ? "asset" : "assets"}</span>
+              <span><b>${pk.length}</b> plant ${pk.length === 1 ? "KPI" : "KPIs"}</span>
+              ${need ? `<span class="need"><b>${need}</b> ${need === 1 ? "KPI needs" : "KPIs need"} a data source</span>` : ""}
+              <span>Map position <b>${Number(p.lat).toFixed(2)}, ${Number(p.lon).toFixed(2)}</b></span>
+            </div>
+          </div>
+          <div class="cfg-tabs" role="tablist">
+            <button type="button" class="cfg-tab${tab === "assets" ? " on" : ""}" role="tab" aria-selected="${tab === "assets"}" data-act="tab" data-tab="assets">Assets<span class="n">${p.assets.length}</span></button>
+            <button type="button" class="cfg-tab${tab === "kpis" ? " on" : ""}" role="tab" aria-selected="${tab === "kpis"}" data-act="tab" data-tab="kpis">Plant KPIs<span class="n">${pk.length}</span></button>
+          </div>
+          <div class="cfg-pane" role="tabpanel">${tab === "assets" ? cfgAssetPane(p) : cfgPlantKpiPane(p)}</div>`;
+      }
+
+      function cfgSourceCell(s) {
+        if (!s || !s.type || s.type === "unset") return '<span class="cfg-chip warn">Source not set</span>';
+        const t = CFG_SOURCES[s.type];
+        if (!t) return '<span class="cfg-chip warn">Source not set</span>';
+        if (s.type === "demo") return `<span class="cfg-chip mute">${esc(t.label)}</span>`;
+        return `<b>${esc(t.label)}</b>${s.ref ? `<code>${esc(s.ref)}</code>` : ""}`;
+      }
+      function cfgKpiRow(k, scopeAttrs) {
+        const refresh = k.source && k.source.refresh ? k.source.refresh : "\u2014";
+        return `<div class="kt-row">
+          <div class="kt-name">${esc(k.name)}</div>
+          <div class="kt-unit">${esc(k.unit || "\u2014")}</div>
+          <div class="kt-src">${cfgSourceCell(k.source)}</div>
+          <div class="kt-refresh">${esc(refresh)}</div>
+          <div class="kt-act"><button type="button" class="cfg-btn sm" data-act="edit-kpi" ${scopeAttrs} data-kid="${esc(k.id)}">Edit</button><button type="button" class="cfg-btn sm ghost" data-act="del-kpi" ${scopeAttrs} data-kid="${esc(k.id)}">Remove</button></div>
+        </div>`;
+      }
+      const CFG_KT_HEAD =
+        '<div class="kt-row head"><div>KPI</div><div>Unit</div><div>Data source</div><div>Refresh</div><div></div></div>';
+
+      function cfgPlantKpiPane(p) {
+        const list = cfgPlantKpis(p.hac);
+        const bar = `<div class="cfg-toolbar"><span class="cfg-tip">These KPIs appear in the plant summary panel.</span><span class="grow"></span><button type="button" class="cfg-btn primary" data-act="add-kpi" data-scope="plant">Add plant KPI</button></div>`;
+        if (!list.length)
+          return (
+            bar +
+            `<div class="cfg-empty"><b>No plant KPIs yet</b><p>Add KPIs for Production, Maintenance, Energy and Sustainability, and choose where each one gets its data.</p></div>`
+          );
+        const groups = CFG_PILLARS.map((pl) => ({ pl, items: list.filter((k) => k.pillar === pl.id) })).filter((g) => g.items.length);
+        return (
+          bar +
+          '<div class="kt">' +
+          CFG_KT_HEAD +
+          groups
+            .map(
+              (g) =>
+                `<div class="kt-group"><i style="background:${g.pl.color}"></i>${g.pl.id}<span>${g.items.length}</span></div>` +
+                g.items.map((k) => cfgKpiRow(k, 'data-scope="plant"')).join(""),
+            )
+            .join("") +
+          "</div>"
+        );
+      }
+
+      function cfgAssetPane(p) {
+        if (!p.assets.length)
+          return `<div class="cfg-empty"><b>Add the first asset to ${esc(p.name)}</b><p>Pick an asset from the library or create a new asset type, then define the KPIs for each asset and where they get their data.</p><button type="button" class="cfg-btn primary" data-act="add-asset">Add asset</button></div>`;
+        const types = [...new Set(p.assets.map((a) => a.abbr))];
+        if (cfgState.assetType !== "ALL" && !types.includes(cfgState.assetType)) cfgState.assetType = "ALL";
+        return `<div class="cfg-toolbar">
+            <input id="cfgAssetSearch" class="cfg-input" type="search" placeholder="Search assets" aria-label="Search assets" autocomplete="off" value="${esc(cfgState.assetQuery)}" />
+            <select id="cfgAssetType" class="cfg-select" aria-label="Filter by asset type">
+              <option value="ALL">All types</option>
+              ${types.map((t) => `<option value="${esc(t)}"${cfgState.assetType === t ? " selected" : ""}>${esc(TYPE_LABEL[t] || t)}</option>`).join("")}
+            </select>
+            <span class="grow"></span>
+            <button type="button" class="cfg-btn primary" data-act="add-asset">Add asset</button>
+          </div>
+          <div id="cfgAssetList">${cfgAssetRows(p)}</div>`;
+      }
+      function cfgAssetRows(p) {
+        const q = cfgState.assetQuery.trim().toLowerCase();
+        const rows = p.assets
+          .filter(
+            (a) =>
+              (cfgState.assetType === "ALL" || a.abbr === cfgState.assetType) &&
+              (!q || a.id.toLowerCase().includes(q) || String(a.machine).toLowerCase().includes(q)),
+          )
+          .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+        if (!rows.length) return '<div class="empty-note">No assets match.</div>';
+        return rows
+          .map((a) => {
+            const open = cfgState.open.has(a.id);
+            const kp = CFG.assetKpis[a.id];
+            const n = kp ? kp.length : cfgSuggest(a.abbr).length;
+            const need = kp ? kp.filter(cfgUnset).length : 0;
+            let body = "";
+            if (open) {
+              const list = cfgAssetKpis(a);
+              const attrs = `data-scope="asset" data-aid="${esc(a.id)}"`;
+              body = `<div class="ar-b">
+                <div class="cfg-toolbar"><span class="cfg-tip">KPIs for ${esc(a.id)}</span><span class="grow"></span>${
+                  a.custom ? `<button type="button" class="cfg-btn sm danger" data-act="del-asset" data-aid="${esc(a.id)}">Remove asset</button>` : ""
+                }<button type="button" class="cfg-btn sm primary" data-act="add-kpi" ${attrs}>Add KPI</button></div>
+                ${
+                  list.length
+                    ? `<div class="kt">${CFG_KT_HEAD}${list.map((k) => cfgKpiRow(k, attrs)).join("")}</div>`
+                    : '<div class="empty-note">No KPIs for this asset yet.</div>'
+                }</div>`;
+            }
+            return `<div class="ar"><button type="button" class="ar-h" data-act="toggle-asset" data-aid="${esc(a.id)}" aria-expanded="${open}">
+              <span class="pt-chev" aria-hidden="true">\u25be</span><span class="ar-id">${esc(a.id)}</span><span class="ar-type">${esc(a.machine)}</span><span class="grow"></span>
+              ${need ? `<span class="cfg-chip warn">${need} need a source</span>` : ""}<span class="ar-n">${plural(n, "KPI")}</span></button>${body}</div>`;
+          })
+          .join("");
+      }
+
+      /* ---------- events for the config page ---------- */
+      $id("pgConfig").addEventListener("click", (e) => {
+        const t = e.target.closest("[data-act]");
+        if (!t) return;
+        const p = PLANTS[cfgState.hac];
+        switch (t.dataset.act) {
+          case "add-plant": return cfgPlantDialog(false);
+          case "edit-plant": return cfgPlantDialog(true);
+          case "delete-plant": return cfgDeletePlant(p);
+          case "pick-plant":
+            cfgState.hac = t.dataset.hac;
+            cfgState.tab = "assets";
+            cfgState.assetQuery = "";
+            cfgState.assetType = "ALL";
+            cfgState.open.clear();
+            return renderConfig();
+          case "tab":
+            cfgState.tab = t.dataset.tab;
+            return renderCfgDetail();
+          case "toggle-asset": {
+            const id = t.dataset.aid;
+            cfgState.open.has(id) ? cfgState.open.delete(id) : cfgState.open.add(id);
+            $id("cfgAssetList").innerHTML = cfgAssetRows(p);
+            const again = $id("cfgAssetList").querySelector(`[data-act="toggle-asset"][data-aid="${id}"]`);
+            if (again) again.focus();
+            return;
+          }
+          case "add-asset": return cfgAssetDialog();
+          case "del-asset": return cfgDeleteAsset(p, t.dataset.aid);
+          case "add-kpi": return cfgKpiDialog(t.dataset.scope, t.dataset.aid, null);
+          case "edit-kpi": return cfgKpiDialog(t.dataset.scope, t.dataset.aid, t.dataset.kid);
+          case "del-kpi": return cfgDeleteKpi(t.dataset.scope, t.dataset.aid, t.dataset.kid);
+          case "reset": return cfgReset();
+        }
+      });
+      $id("cfgPlantSearch").addEventListener("input", (e) => {
+        cfgState.plantQuery = e.target.value;
+        renderCfgList();
+      });
+      $id("pgConfig").addEventListener("input", (e) => {
+        if (e.target.id !== "cfgAssetSearch") return;
+        cfgState.assetQuery = e.target.value;
+        $id("cfgAssetList").innerHTML = cfgAssetRows(PLANTS[cfgState.hac]);
+      });
+      $id("pgConfig").addEventListener("change", (e) => {
+        if (e.target.id !== "cfgAssetType") return;
+        cfgState.assetType = e.target.value;
+        $id("cfgAssetList").innerHTML = cfgAssetRows(PLANTS[cfgState.hac]);
+      });
+
+      /* ---------- dialog + toast plumbing ---------- */
+      let cfgLastFocus = null;
+      let cfgToastTimer = null;
+      function cfgToast(msg) {
+        const t = $id("cfgToast");
+        t.textContent = msg;
+        t.classList.add("on");
+        clearTimeout(cfgToastTimer);
+        cfgToastTimer = setTimeout(() => t.classList.remove("on"), 2600);
+      }
+      function cfgFld(name, label, control, hint, hidden) {
+        return `<div class="cfg-field" data-f="${name}"${hidden ? " hidden" : ""}><label for="f_${name}">${label}</label>${control}${hint ? `<div class="hint">${hint}</div>` : ""}<div class="cfg-err" role="alert" hidden></div></div>`;
+      }
+      function cfgErr(form, name, msg) {
+        const f = form.querySelector(`[data-f="${name}"]`);
+        if (!f) return;
+        f.classList.add("bad");
+        const e = f.querySelector(".cfg-err");
+        e.textContent = msg;
+        e.hidden = false;
+        f.querySelectorAll("input,select").forEach((c) => c.setAttribute("aria-invalid", "true"));
+      }
+      function cfgClearField(f) {
+        if (!f) return;
+        f.classList.remove("bad");
+        const er = f.querySelector(".cfg-err");
+        er.hidden = true;
+        er.textContent = "";
+        f.querySelectorAll("[aria-invalid]").forEach((c) => c.removeAttribute("aria-invalid"));
+      }
+      function cfgClearErrs(form) {
+        form.querySelectorAll(".cfg-field.bad").forEach((f) => {
+          f.classList.remove("bad");
+          const e = f.querySelector(".cfg-err");
+          e.hidden = true;
+          e.textContent = "";
+          f.querySelectorAll("[aria-invalid]").forEach((c) => c.removeAttribute("aria-invalid"));
+        });
+      }
+      function cfgOpenModal(o) {
+        const m = $id("cfgModal");
+        cfgLastFocus = document.activeElement;
+        m.innerHTML = `<div class="cfg-dialog${o.wide ? " wide" : ""}" role="dialog" aria-modal="true" aria-labelledby="cfgDlgTitle">
+          <form novalidate>
+            <div class="cfg-dh"><h3 id="cfgDlgTitle">${esc(o.title)}</h3>${o.sub ? `<p>${esc(o.sub)}</p>` : ""}</div>
+            <div class="cfg-db">${o.body}</div>
+            <div class="cfg-df"><button type="button" class="cfg-btn" data-close>Cancel</button><button type="submit" class="cfg-btn ${o.danger ? "danger-solid" : "primary"}">${esc(o.submit)}</button></div>
+          </form></div>`;
+        m.classList.add("on");
+        const form = m.querySelector("form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          cfgClearErrs(form);
+          if (o.onSubmit(form) === false) {
+            const bad = form.querySelector(".cfg-field.bad input, .cfg-field.bad select");
+            if (bad) bad.focus();
+            return;
+          }
+          cfgCloseModal();
+        });
+        m.querySelector("[data-close]").addEventListener("click", cfgCloseModal);
+        const clearField = (e) => cfgClearField(e.target.closest && e.target.closest(".cfg-field.bad"));
+        form.addEventListener("input", clearField);
+        form.addEventListener("change", clearField);
+        if (o.onOpen) o.onOpen(form);
+        const first = form.querySelector("input:not([disabled]):not([type=hidden]), select:not([disabled])");
+        (first || form.querySelector("button[type=submit]")).focus();
+      }
+      function cfgCloseModal() {
+        const m = $id("cfgModal");
+        m.classList.remove("on");
+        m.innerHTML = "";
+        if (cfgLastFocus && document.contains(cfgLastFocus) && cfgLastFocus.focus) cfgLastFocus.focus();
+      }
+      document.addEventListener("keydown", (e) => {
+        const m = $id("cfgModal");
+        if (!m.classList.contains("on")) return;
+        if (e.key === "Escape") {
+          e.preventDefault();
+          cfgCloseModal();
+        } else if (e.key === "Tab") {
+          const f = [...m.querySelectorAll("input,select,button")].filter((x) => !x.disabled && !x.hidden && x.offsetParent !== null);
+          if (!f.length) return;
+          const first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      });
+      function cfgConfirm(title, message, confirmLabel, onConfirm) {
+        cfgOpenModal({
+          title,
+          body: `<p>${esc(message)}</p>`,
+          submit: confirmLabel,
+          danger: true,
+          onSubmit: () => {
+            onConfirm();
+          },
+        });
+      }
+
+      /* ---------- add / edit plant ---------- */
+      function cfgSuggestCode(name) {
+        const letters = name
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toUpperCase()
+          .replace(/[^A-Z0-9]/g, "");
+        if (!letters || !/^[A-Z]/.test(letters)) return "";
+        const base = letters.slice(0, 3);
+        if (!PLANTS[base]) return base;
+        for (let i = 2; i < 10; i++) if (!PLANTS[base + i]) return base + i;
+        return base;
+      }
+      function cfgPlantDialog(edit) {
+        const cur = edit ? PLANTS[cfgState.hac] : null;
+        const regionOpts = cfgRegions()
+          .map((r) => `<option value="${esc(r)}"${cur && cur.region === r ? " selected" : ""}>${esc(r)}</option>`)
+          .join("");
+        cfgOpenModal({
+          title: edit ? "Edit plant details" : "Add plant",
+          sub: edit ? null : "Choose where the plant sits, then name it. You can add its assets and KPIs right after.",
+          submit: edit ? "Save changes" : "Add plant",
+          body:
+            cfgFld("region", "Region", `<select id="f_region" name="region"><option value="">Select a region</option>${regionOpts}</select>`) +
+            cfgFld("country", "Country", `<select id="f_country" name="country"${cur ? "" : " disabled"}><option value="">Select a region first</option></select>`) +
+            cfgFld("countryOther", "Country name", '<input type="text" id="f_countryOther" name="countryOther" maxlength="40" autocomplete="off" />', null, true) +
+            cfgFld("name", "Plant name", '<input type="text" id="f_name" name="name" maxlength="40" autocomplete="off" placeholder="e.g. Agadir" />') +
+            cfgFld("hac", "Plant code", `<input type="text" id="f_hac" name="hac" maxlength="5" autocomplete="off" placeholder="e.g. AGR"${edit ? " disabled" : ""} />`, "Short unique code used in asset IDs, such as AGR.461-KILN. It can\u2019t be changed later.") +
+            '<div class="cfg-row2">' +
+            cfgFld("lat", "Latitude", '<input type="text" id="f_lat" name="lat" inputmode="decimal" autocomplete="off" />') +
+            cfgFld("lon", "Longitude", '<input type="text" id="f_lon" name="lon" inputmode="decimal" autocomplete="off" />') +
+            '</div><div class="hint" style="margin:-6px 0 8px;font-size:13px;color:var(--ink-3)">Filled in from the country. Adjust to the exact site to place the plant on the map.</div>',
+          onOpen(form) {
+            const el = (n) => form.elements[n];
+            const touched = { hac: !!edit, ll: !!edit };
+            const fillCountries = (region, selected) => {
+              const list = cfgCountryList(region);
+              el("country").innerHTML =
+                '<option value="">Select a country</option>' +
+                list.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join("") +
+                '<option value="__other">Other country\u2026</option>';
+              el("country").disabled = !region;
+              if (!region) el("country").innerHTML = '<option value="">Select a region first</option>';
+              if (selected) el("country").value = selected;
+            };
+            if (cur) {
+              fillCountries(cur.region, cur.country);
+              el("name").value = cur.name;
+              el("hac").value = cur.hac;
+              el("lat").value = cur.lat;
+              el("lon").value = cur.lon;
+            }
+            el("region").addEventListener("change", () => {
+              fillCountries(el("region").value);
+              form.querySelector('[data-f="countryOther"]').hidden = true;
+              if (!touched.ll) { el("lat").value = ""; el("lon").value = ""; }
+            });
+            el("country").addEventListener("change", () => {
+              const v = el("country").value;
+              form.querySelector('[data-f="countryOther"]').hidden = v !== "__other";
+              if (v === "__other") el("countryOther").focus();
+              const ll = cfgCountryLL(el("region").value, v);
+              if (ll && !touched.ll) {
+                el("lat").value = ll[0];
+                el("lon").value = ll[1];
+                cfgClearField(form.querySelector('[data-f="lat"]'));
+                cfgClearField(form.querySelector('[data-f="lon"]'));
+              }
+            });
+            el("name").addEventListener("input", () => {
+              if (!touched.hac) {
+                el("hac").value = cfgSuggestCode(el("name").value);
+                cfgClearField(form.querySelector('[data-f="hac"]'));
+              }
+            });
+            el("hac").addEventListener("input", () => {
+              touched.hac = true;
+              el("hac").value = el("hac").value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+            });
+            ["lat", "lon"].forEach((n) => el(n).addEventListener("input", () => (touched.ll = true)));
+          },
+          onSubmit(form) {
+            const v = (n) => form.elements[n].value.trim();
+            const region = v("region");
+            const sel = v("country");
+            const country = sel === "__other" ? v("countryOther") : sel;
+            const name = v("name");
+            const hac = v("hac").toUpperCase();
+            const lat = parseFloat(v("lat").replace(",", "."));
+            const lon = parseFloat(v("lon").replace(",", "."));
+            let bad = false;
+            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
+            if (!region) err("region", "Select a region.");
+            if (!sel) err("country", "Select a country.");
+            else if (sel === "__other") {
+              if (!country) err("countryOther", "Enter the country name.");
+              else if (!CFG_NAME_RE.test(country)) err("countryOther", CFG_NAME_MSG);
+            }
+            if (!name) err("name", "Enter a plant name.");
+            else if (!CFG_NAME_RE.test(name)) err("name", CFG_NAME_MSG);
+            else if (country && Object.values(PLANTS).some((x) => x !== cur && String(x.country).toLowerCase() === country.toLowerCase() && x.name.toLowerCase() === name.toLowerCase()))
+              err("name", `There is already a plant called ${name} in ${country}.`);
+            if (!edit) {
+              if (!hac) err("hac", "Enter a plant code.");
+              else if (!/^[A-Z][A-Z0-9]{1,4}$/.test(hac)) err("hac", "Use 2 to 5 letters or numbers, starting with a letter.");
+              else if (PLANTS[hac]) err("hac", `${hac} is already used by ${PLANTS[hac].name}.`);
+            }
+            if (!isFinite(lat) || lat < -90 || lat > 90) err("lat", "Enter a latitude between -90 and 90.");
+            if (!isFinite(lon) || lon < -180 || lon > 180) err("lon", "Enter a longitude between -180 and 180.");
+            if (bad) return false;
+
+            if (edit) {
+              Object.assign(cur, { region, country, name, lat, lon });
+              cfgSave();
+              plantsChanged();
+              cfgToast("Plant details saved");
+            } else {
+              const plant = { hac, region, country, name, lat, lon, st: "ok", counts: {}, assetCount: 0, assets: [], custom: true };
+              PLANTS[hac] = plant;
+              CFG.customPlants[hac] = plant;
+              cfgSave();
+              // make sure the new plant is visible in the sidebar
+              navQuery = "";
+              $id("plantSearch").value = "";
+              navCollapsed.delete("r:" + region);
+              navCollapsed.delete("c:" + region + "|" + country);
+              cfgState.hac = hac;
+              cfgState.tab = "assets";
+              cfgState.assetQuery = "";
+              cfgState.assetType = "ALL";
+              cfgState.open.clear();
+              plantsChanged();
+              cfgToast("Plant added");
+            }
+          },
+        });
+      }
+      function cfgDeletePlant(p) {
+        cfgConfirm(
+          `Remove ${p.name}?`,
+          `${plural(p.assets.length, "asset")} and all KPIs configured for this plant will be removed too. This can\u2019t be undone.`,
+          "Remove plant",
+          () => {
+            p.assets.forEach((a) => delete CFG.assetKpis[a.id]);
+            delete CFG.plantKpis[p.hac];
+            delete CFG.customPlants[p.hac];
+            delete PLANTS[p.hac];
+            if (curHac === p.hac) curHac = "SOK";
+            if (navActiveHac === p.hac) navActiveHac = null;
+            cfgState.hac = cfgFirstHac();
+            cfgState.open.clear();
+            cfgSave();
+            plantsChanged();
+            cfgToast("Plant removed");
+          },
+        );
+      }
+
+      /* ---------- add asset ---------- */
+      function cfgAssetDialog() {
+        const p = PLANTS[cfgState.hac];
+        const lib = cfgLibraryList();
+        cfgOpenModal({
+          title: "Add asset",
+          sub: `Add an asset to ${p.name}. Pick one from the asset library or create a new asset type.`,
+          submit: "Add asset",
+          wide: true,
+          body:
+            cfgFld("lib", "Asset type", `<select id="f_lib" name="lib"><option value="">Select from the asset library</option>${lib.map((t) => `<option value="${esc(t.abbr)}">${esc(t.name)} (${esc(t.abbr)})</option>`).join("")}<option value="__new">Create a new asset type\u2026</option></select>`) +
+            '<div class="cfg-row2">' +
+            cfgFld("newName", "New asset type name", '<input type="text" id="f_newName" name="newName" maxlength="40" autocomplete="off" placeholder="e.g. Screw Conveyor" />', null, true) +
+            cfgFld("newCode", "Short code", '<input type="text" id="f_newCode" name="newCode" maxlength="5" autocomplete="off" placeholder="e.g. SCR" />', "2 to 5 letters or numbers. Saved to the library for every plant.", true) +
+            "</div>" +
+            cfgFld("code", "Asset code in this plant", '<input type="text" id="f_code" name="code" maxlength="30" autocomplete="off" placeholder="e.g. 461-KILN" />', `<span id="idPreview">Asset ID: ${esc(p.hac)}.\u2026</span>`) +
+            '<div class="cfg-field" data-f="kpis"><label>KPIs to start with</label><div id="kpiChecks" class="cfg-checks"><div class="cfg-check" style="color:var(--ink-3)">Select an asset type to see suggested KPIs.</div></div><div class="hint">Suggested from the asset type. Set each KPI\u2019s data source after adding the asset.</div></div>',
+          onOpen(form) {
+            const el = (n) => form.elements[n];
+            let sugg = [];
+            const drawChecks = () => {
+              const t = el("lib").value;
+              const abbr = t === "__new" ? "" : t;
+              sugg = t ? cfgSuggest(abbr) : [];
+              $id("kpiChecks").innerHTML = sugg.length
+                ? sugg.map((k, i) => `<label class="cfg-check"><input type="checkbox" name="kpi" value="${i}" checked /> ${esc(k.name)} <span class="mute">${esc(k.unit)}</span></label>`).join("")
+                : '<div class="cfg-check" style="color:var(--ink-3)">Select an asset type to see suggested KPIs.</div>';
+            };
+            form._sugg = () => sugg;
+            el("lib").addEventListener("change", () => {
+              const isNew = el("lib").value === "__new";
+              form.querySelector('[data-f="newName"]').hidden = !isNew;
+              form.querySelector('[data-f="newCode"]').hidden = !isNew;
+              drawChecks();
+              if (isNew) el("newName").focus();
+            });
+            el("code").addEventListener("input", () => {
+              const c = el("code").value.trim();
+              $id("idPreview").textContent = `Asset ID: ${p.hac}.${c || "\u2026"}`;
+            });
+            el("newCode").addEventListener("input", () => (el("newCode").value = el("newCode").value.replace(/[^A-Za-z0-9]/g, "")));
+          },
+          onSubmit(form) {
+            const v = (n) => form.elements[n].value.trim();
+            const t = v("lib");
+            const code = v("code");
+            let bad = false;
+            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
+            let abbr = t, machine = "";
+            if (!t) err("lib", "Select an asset type.");
+            else if (t === "__new") {
+              const nn = v("newName"), nc = v("newCode");
+              if (!nn) err("newName", "Enter a name for the new asset type.");
+              else if (!CFG_NAME_RE.test(nn)) err("newName", CFG_NAME_MSG);
+              else if (lib.some((x) => x.name.toLowerCase() === nn.toLowerCase())) err("newName", "This type is already in the library. Choose it from the list instead.");
+              if (!nc) err("newCode", "Enter a short code.");
+              else if (!/^[A-Za-z0-9]{2,5}$/.test(nc)) err("newCode", "Use 2 to 5 letters or numbers.");
+              else if (lib.some((x) => x.abbr.toLowerCase() === nc.toLowerCase())) err("newCode", "This code is already used in the library.");
+              abbr = nc;
+              machine = nn;
+            } else machine = (lib.find((x) => x.abbr === t) || {}).name || t;
+            if (!code) err("code", "Enter the asset code used in this plant.");
+            else if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,29}$/.test(code)) err("code", "Use letters, numbers, dots, hyphens or underscores, with no spaces.");
+            else if (p.assets.some((a) => a.id.toLowerCase() === (p.hac + "." + code).toLowerCase())) err("code", `${p.hac}.${code} already exists in this plant.`);
+            if (bad) return false;
+
+            if (t === "__new") {
+              const type = { abbr, name: machine };
+              CFG.library.push(type);
+              cfgRegisterType(type);
+            }
+            const asset = { id: p.hac + "." + code, code, abbr, machine, risk: null, status: "ok", life: null, custom: true };
+            p.assets.push(asset);
+            if (!p.custom) (CFG.addedAssets[p.hac] ||= []).push(asset);
+            cfgRecount(p);
+            const picked = [...form.querySelectorAll('input[name="kpi"]:checked')].map((c) => form._sugg()[Number(c.value)]);
+            CFG.assetKpis[asset.id] = picked.map((k) => ({ id: cfgUid(), name: k.name, unit: k.unit, source: { type: "unset", ref: "", refresh: "" } }));
+            cfgSave();
+            cfgState.tab = "assets";
+            cfgState.assetQuery = "";
+            cfgState.assetType = "ALL";
+            cfgState.open.add(asset.id);
+            renderConfig();
+            cfgToast("Asset added");
+          },
+        });
+      }
+      function cfgDeleteAsset(p, id) {
+        cfgConfirm(`Remove ${id}?`, "The asset and its KPIs will be removed. This can\u2019t be undone.", "Remove asset", () => {
+          p.assets = p.assets.filter((a) => a.id !== id);
+          if (CFG.addedAssets[p.hac]) CFG.addedAssets[p.hac] = CFG.addedAssets[p.hac].filter((a) => a.id !== id);
+          delete CFG.assetKpis[id];
+          cfgState.open.delete(id);
+          cfgRecount(p);
+          cfgSave();
+          renderConfig();
+          cfgToast("Asset removed");
+        });
+      }
+
+      /* ---------- add / edit / remove KPI (plant or asset scope) ---------- */
+      function cfgScopeList(scope, aid) {
+        const p = PLANTS[cfgState.hac];
+        if (scope === "plant") return cfgPlantKpis(p.hac);
+        const a = p.assets.find((x) => x.id === aid);
+        return a ? cfgAssetKpis(a) : [];
+      }
+      function cfgKpiDialog(scope, aid, kid) {
+        const p = PLANTS[cfgState.hac];
+        const list = cfgScopeList(scope, aid);
+        const cur = kid ? list.find((k) => k.id === kid) : null;
+        const isPlant = scope === "plant";
+        const s = (cur && cur.source) || {};
+        const srcOpts = Object.entries(CFG_SOURCES)
+          .filter(([k]) => k !== "demo" || s.type === "demo")
+          .map(([k, t]) => `<option value="${k}"${s.type === k ? " selected" : ""}>${esc(t.label)}</option>`)
+          .join("");
+        cfgOpenModal({
+          title: cur ? "Edit KPI" : isPlant ? "Add plant KPI" : "Add KPI",
+          sub: isPlant ? `Plant KPI for ${p.name}.` : `KPI for asset ${aid}.`,
+          submit: cur ? "Save changes" : "Add KPI",
+          wide: true,
+          body:
+            (isPlant
+              ? cfgFld("pillar", "Pillar", `<select id="f_pillar" name="pillar"><option value="">Select a pillar</option>${CFG_PILLARS.map((pl) => `<option value="${pl.id}"${cur && cur.pillar === pl.id ? " selected" : ""}>${pl.id}</option>`).join("")}</select>`)
+              : "") +
+            '<div class="cfg-row2">' +
+            cfgFld("name", "KPI name", `<input type="text" id="f_name" name="name" maxlength="60" autocomplete="off" placeholder="${isPlant ? "e.g. Kiln MTBF" : "e.g. Vibration"}" value="${esc(cur ? cur.name : "")}" />`) +
+            cfgFld("unit", "Unit", `<input type="text" id="f_unit" name="unit" maxlength="16" autocomplete="off" placeholder="e.g. kWh/t or %" value="${esc(cur ? cur.unit : "")}" />`, "Optional.") +
+            "</div>" +
+            cfgFld("stype", "Data source", `<select id="f_stype" name="stype"><option value="">Select where this KPI gets its data</option>${srcOpts}</select>`) +
+            cfgFld("ref", `<span id="refLabel">Reference</span>`, `<input type="text" id="f_ref" name="ref" autocomplete="off" value="${esc(s.ref || "")}" />`, null, true) +
+            cfgFld("refresh", "Refresh", `<select id="f_refresh" name="refresh">${CFG_REFRESH.map((r) => `<option${(s.refresh || "Hourly") === r ? " selected" : ""}>${r}</option>`).join("")}</select>`, null, true),
+          onOpen(form) {
+            const el = (n) => form.elements[n];
+            const sync = () => {
+              const t = CFG_SOURCES[el("stype").value];
+              const hasRef = !!(t && t.ref);
+              form.querySelector('[data-f="ref"]').hidden = !hasRef;
+              form.querySelector('[data-f="refresh"]').hidden = !hasRef;
+              if (hasRef) {
+                $id("refLabel").textContent = t.ref;
+                el("ref").placeholder = t.hint || "";
+              }
+            };
+            el("stype").addEventListener("change", () => {
+              sync();
+              if (!form.querySelector('[data-f="ref"]').hidden) el("ref").focus();
+            });
+            sync();
+          },
+          onSubmit(form) {
+            const v = (n) => form.elements[n].value.trim();
+            const name = v("name"), unit = v("unit"), stype = v("stype"), ref = v("ref");
+            let bad = false;
+            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
+            const pillar = isPlant ? v("pillar") : null;
+            if (isPlant && !pillar) err("pillar", "Select a pillar.");
+            if (!name) err("name", "Enter a KPI name.");
+            else if (/[<>&"'`]/.test(name)) err("name", "Remove the characters < > & \" ' `.");
+            else if (list.some((k) => k !== cur && k.name.toLowerCase() === name.toLowerCase())) err("name", `${isPlant ? "This plant" : "This asset"} already has a KPI called ${name}.`);
+            if (/[<>&"'`]/.test(unit)) err("unit", "Remove the characters < > & \" ' `.");
+            if (!stype) err("stype", "Choose where this KPI gets its data.");
+            else if (CFG_SOURCES[stype].ref) {
+              if (!ref) err("ref", `Enter the ${CFG_SOURCES[stype].ref.toLowerCase()}.`);
+              else if (stype === "api" && !/^https?:\/\/\S+$/i.test(ref)) err("ref", "Enter a full URL starting with http:// or https://.");
+            }
+            if (bad) return false;
+            const hasRef = !!CFG_SOURCES[stype].ref;
+            const source = { type: stype, ref: hasRef ? ref : "", refresh: hasRef ? v("refresh") : "" };
+            if (cur) Object.assign(cur, { name, unit, source }, isPlant ? { pillar } : {});
+            else list.push(Object.assign({ id: cfgUid(), name, unit, source }, isPlant ? { pillar } : {}));
+            cfgSave();
+            renderConfig();
+            cfgToast(cur ? "KPI saved" : "KPI added");
+          },
+        });
+      }
+      function cfgDeleteKpi(scope, aid, kid) {
+        const list = cfgScopeList(scope, aid);
+        const k = list.find((x) => x.id === kid);
+        if (!k) return;
+        cfgConfirm(`Remove ${k.name}?`, "The KPI and its data source setting will be removed.", "Remove KPI", () => {
+          list.splice(list.indexOf(k), 1);
+          cfgSave();
+          renderConfig();
+          cfgToast("KPI removed");
+        });
+      }
+      function cfgReset() {
+        cfgConfirm(
+          "Reset configuration?",
+          "Plants, assets, asset types and KPI settings you added or changed here will be discarded and the built-in plants restored. This can\u2019t be undone.",
+          "Reset configuration",
+          () => {
+            try {
+              localStorage.removeItem(CFG_KEY);
+            } catch (e) {}
+            location.reload();
+          },
+        );
+      }
+
+      cfgLoad();
 
       setLogo();
       initNav();
@@ -5071,8 +7116,9 @@ h1{font-size:30px;margin:0 0 7px}
           SOK: { x: 53.7, y: 39.5 },
         };
 
+        const usedPos = Object.values(cardPositions).slice();
         Object.values(PLANTS).forEach((p) => {
-          const pos = cardPositions[p.hac] || { x: 50, y: 50 };
+          const pos = cardPositions[p.hac] || cfgPlaceOnMap(p, usedPos);
           const color = STCOL[p.st] || "#22d3ee";
           const marker = document.createElement("button");
           marker.type = "button";
