@@ -91,7 +91,7 @@
         background: #111c2b;
         border-right: 1px solid #2a3b4f;
         color: #e7eff6;
-        padding: 20px 14px;
+        padding: 10px 14px;
         display: flex;
         flex-direction: column;
         gap: 3px;
@@ -3054,6 +3054,107 @@
         line-height: 1.5;
       }
 
+      .configured-global-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .configured-global-kpis[hidden] {
+        display: none;
+      }
+      .configured-global-kpis .kpi {
+        min-width: 0;
+      }
+      .global-kpi-source {
+        margin-top: 6px;
+        font-size: 10px;
+        color: var(--ink-3);
+      }
+      .cfg-global-section {
+        margin: 0 0 18px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+      }
+      .cfg-global-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .cfg-global-head h3 {
+        font-size: 15px;
+      }
+      .cfg-global-note {
+        font-size: 12px;
+        color: var(--ink-3);
+        margin-bottom: 12px;
+      }
+      .cfg-global-list {
+        display: grid;
+        gap: 8px;
+      }
+      .cfg-global-row {
+        display: grid;
+        grid-template-columns: minmax(150px, 1.5fr) 90px minmax(130px, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--bg);
+      }
+      .cfg-global-row .g-name {
+        font-weight: 600;
+      }
+      .cfg-global-row .g-meta {
+        font-size: 11px;
+        color: var(--ink-3);
+      }
+      .cfg-image-preview {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--bg);
+      }
+      .cfg-image-preview img {
+        width: 110px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 7px;
+        border: 1px solid var(--line);
+      }
+      .cfg-image-preview span {
+        font-size: 11px;
+        color: var(--ink-3);
+      }
+      @media (max-width: 900px) {
+        .configured-global-kpis {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .cfg-global-row {
+          grid-template-columns: 1fr 70px;
+        }
+        .cfg-global-row .g-source {
+          grid-column: 1/-1;
+        }
+        .cfg-global-row .g-actions {
+          grid-column: 2;
+          grid-row: 1;
+        }
+      }
+      @media (max-width: 600px) {
+        .configured-global-kpis {
+          grid-template-columns: 1fr;
+        }
+      }
+
       /* KPI table */
       .kt {
         border: 1px solid var(--line);
@@ -3062,7 +3163,9 @@
       }
       .kt-row {
         display: grid;
-        grid-template-columns: minmax(150px, 1.3fr) 84px minmax(190px, 2fr) 104px 150px;
+        grid-template-columns:
+          minmax(150px, 1.3fr) 84px minmax(190px, 2fr)
+          104px 150px;
         gap: 12px;
         align-items: center;
         padding: 10px 14px;
@@ -3409,9 +3512,6 @@
   <body>
     <div class="app">
       <aside class="side">
-        <div class="brand">
-          <span class="brand-text"><b>Plants</b></span>
-        </div>
         <div class="nav on" id="navHome" onclick="goHome()">
           <span class="ic">◧</span
           ><span class="nav-label">Global Overview</span>
@@ -3420,7 +3520,17 @@
           <span>Plants</span><span class="grp-count" id="plantCount"></span>
         </div>
         <div class="ptree-search">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"></circle><path d="M13.5 13.5 17 17"></path></svg>
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="9" cy="9" r="5.5"></circle>
+            <path d="M13.5 13.5 17 17"></path>
+          </svg>
           <input
             id="plantSearch"
             type="search"
@@ -3428,19 +3538,21 @@
             aria-label="Search plants by name, code, country or region"
             autocomplete="off"
           />
-          <button type="button" class="ptree-clear" id="plantSearchClear" aria-label="Clear search" hidden>×</button>
+          <button
+            type="button"
+            class="ptree-clear"
+            id="plantSearchClear"
+            aria-label="Clear search"
+            hidden
+          >
+            ×
+          </button>
         </div>
         <div id="plantNav" class="ptree"></div>
-        <div class="grp" style="margin-top: 6px">Views</div>
-        <div class="nav">
-          <span class="ic">▣</span><span class="nav-label">Assets</span>
-        </div>
-        <div class="nav">
-          <span class="ic">◭</span><span class="nav-label">Alerts</span>
-        </div>
         <div class="foot">
           <div class="nav" id="navConfig" onclick="openConfig()">
-            <span class="ic">⚙</span><span class="nav-label">Configuration</span>
+            <span class="ic">⚙</span
+            ><span class="nav-label">Configuration</span>
           </div>
           <div class="nav">
             <span class="ic">⏻</span><span class="nav-label">Logout</span>
@@ -3533,6 +3645,11 @@
               </svg>
             </div>
           </div>
+          <div
+            id="configuredGlobalKpis"
+            class="configured-global-kpis"
+            hidden
+          ></div>
 
           <div class="gfilters">
             <div class="gf on">
@@ -3556,20 +3673,8 @@
               <span class="gv">ARM 34%</span>
             </div>
           </div>
-
-          <div class="ai-bar">
-            <div class="ai-ic">✦</div>
-            <div class="t">
-              <b>ePredict AI:</b> El Sokhna kiln MTBF trending down — 4 belt
-              conveyors flagged high-risk. Agadir VRM 561 inspection due in 6
-              days.
-            </div>
-            <div class="go">Review →</div>
-          </div>
-
           <div class="plantmap-wrap" id="plantNetworkWrap">
             <div class="plantmap-head"><h3>Plant Network</h3></div>
-
             <!-- Live geographic map. Plant pins are generated dynamically from PLANTS. -->
             <div id="plantNetworkMap" aria-label="Dynamic Plant Network map">
               <div id="dynamicPlantLayer"></div>
@@ -4166,9 +4271,25 @@
                 gets its data.
               </p>
             </div>
-            <button type="button" class="cfg-btn primary" data-act="add-plant">
-              Add plant
-            </button>
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+              "
+            >
+              <button type="button" class="cfg-btn" data-act="global-kpis">
+                Global Overview KPIs
+              </button>
+              <button
+                type="button"
+                class="cfg-btn primary"
+                data-act="add-plant"
+              >
+                Add plant
+              </button>
+            </div>
           </div>
           <div class="cfg-layout">
             <aside class="cfg-list" aria-label="Plants">
@@ -4184,7 +4305,11 @@
               </div>
               <div id="cfgPlantList"></div>
             </aside>
-            <section class="cfg-detail" id="cfgDetail" aria-live="polite"></section>
+            <section
+              class="cfg-detail"
+              id="cfgDetail"
+              aria-live="polite"
+            ></section>
           </div>
           <div class="cfg-foot">
             <button type="button" class="cfg-btn sm danger" data-act="reset">
@@ -5063,8 +5188,9 @@
         const drWrap = drImage ? drImage.closest(".dr-plant-image") : null;
         const iaImage = document.getElementById("iaPlantImage");
         const iaWrap = iaImage ? iaImage.closest(".ia-plant-image") : null;
-        const shouldShowImage = isAgadir || isSokhna;
-        const imageSrc = isSokhna ? SOK_PLANT_IMG : ISLAND_IMG;
+        const customImage = PLANTS[hac] && PLANTS[hac].image;
+        const shouldShowImage = !!customImage || isAgadir || isSokhna;
+        const imageSrc = customImage || (isSokhna ? SOK_PLANT_IMG : ISLAND_IMG);
 
         [pbField, drWrap, iaWrap].forEach((el) => {
           if (el) el.style.display = shouldShowImage ? "" : "none";
@@ -5885,8 +6011,9 @@ h1{font-size:30px;margin:0 0 7px}
           "</small>";
         document.getElementById("apAlerts").textContent =
           a.status === "crit" ? 2 : a.status === "warn" ? 1 : 0;
-        document.getElementById("apLife").innerHTML =
-          noData ? "\u2014" : a.life + "<small>%</small>";
+        document.getElementById("apLife").innerHTML = noData
+          ? "\u2014"
+          : a.life + "<small>%</small>";
         let d = "";
         for (let i = 0; i < 12; i++) {
           const yy = 45 + Math.sin(i * 0.9 + a.risk) * 18 - i * 1.2;
@@ -5917,7 +6044,8 @@ h1{font-size:30px;margin:0 0 7px}
             })[c],
         );
       const riskOf = (a) => (a.risk == null ? -1 : a.risk);
-      const plural = (n, one, many) => `${n} ${n === 1 ? one : many || one + "s"}`;
+      const plural = (n, one, many) =>
+        `${n} ${n === 1 ? one : many || one + "s"}`;
 
       /* =====================================================================
          CONFIGURATION DATA: regions, countries, pillars, source types
@@ -5926,8 +6054,7 @@ h1{font-size:30px;margin:0 0 7px}
       // Plant, country and asset names end up in many existing views, so they
       // are limited to letters, numbers, spaces and a few separators.
       const CFG_NAME_RE = /^[\p{L}\p{N}][\p{L}\p{N} .\-\/()\u2019]*$/u;
-      const CFG_NAME_MSG =
-        "Use letters, numbers, spaces and . - / ( ) only.";
+      const CFG_NAME_MSG = "Use letters, numbers, spaces and . - / ( ) only.";
 
       // Country centre points [latitude, longitude], used to place new plants.
       const CFG_REGIONS = {
@@ -6025,10 +6152,26 @@ h1{font-size:30px;margin:0 0 7px}
       }
 
       const CFG_PILLARS = [
-        { id: "Production", color: "var(--teal)", badge: ["Stable", "rgba(45,212,191,.14)", "var(--teal)"] },
-        { id: "Maintenance", color: "var(--amber)", badge: ["Watch", "rgba(240,180,76,.16)", "var(--amber)"] },
-        { id: "Energy", color: "var(--blue)", badge: ["Stable", "rgba(76,143,216,.14)", "var(--blue)"] },
-        { id: "Sustainability", color: "var(--violet)", badge: ["Stable", "rgba(155,140,255,.14)", "var(--violet)"] },
+        {
+          id: "Production",
+          color: "var(--teal)",
+          badge: ["Stable", "rgba(45,212,191,.14)", "var(--teal)"],
+        },
+        {
+          id: "Maintenance",
+          color: "var(--amber)",
+          badge: ["Watch", "rgba(240,180,76,.16)", "var(--amber)"],
+        },
+        {
+          id: "Energy",
+          color: "var(--blue)",
+          badge: ["Stable", "rgba(76,143,216,.14)", "var(--blue)"],
+        },
+        {
+          id: "Sustainability",
+          color: "var(--violet)",
+          badge: ["Stable", "rgba(155,140,255,.14)", "var(--violet)"],
+        },
       ];
       // The plant KPIs the dashboard already shows (same values as before).
       const CFG_SEED_PLANT_KPIS = [
@@ -6050,18 +6193,47 @@ h1{font-size:30px;margin:0 0 7px}
         ["Sustainability", "CO\u2082 Intensity", "kg/t", "570"],
         ["Sustainability", "Clinker Factor", "", "0.72"],
         ["Sustainability", "Legal Compliance", "", "Compliant", "teal"],
-      ].map(([pillar, name, unit, value, tone]) => ({ pillar, name, unit, value, tone }));
+      ].map(([pillar, name, unit, value, tone]) => ({
+        pillar,
+        name,
+        unit,
+        value,
+        tone,
+      }));
 
       const CFG_SOURCES = {
-        historian: { label: "Historian tag", ref: "Tag name", hint: "e.g. K461.MTBF.13WK" },
-        sql: { label: "SQL query or view", ref: "Query or view name", hint: "e.g. vw_plant_kpi_daily" },
+        historian: {
+          label: "Historian tag",
+          ref: "Tag name",
+          hint: "e.g. K461.MTBF.13WK",
+        },
+        sql: {
+          label: "SQL query or view",
+          ref: "Query or view name",
+          hint: "e.g. vw_plant_kpi_daily",
+        },
         api: { label: "REST API", ref: "Endpoint URL", hint: "https://" },
-        erp: { label: "SAP / ERP report", ref: "Report, table or transaction", hint: "" },
-        calc: { label: "Calculated from other KPIs", ref: "Formula", hint: "e.g. {Kiln run hours} / {Kiln stops}" },
+        erp: {
+          label: "SAP / ERP report",
+          ref: "Report, table or transaction",
+          hint: "",
+        },
+        calc: {
+          label: "Calculated from other KPIs",
+          ref: "Formula",
+          hint: "e.g. {Kiln run hours} / {Kiln stops}",
+        },
         manual: { label: "Manual entry", ref: null },
         demo: { label: "Not connected (demo value)", ref: null },
       };
-      const CFG_REFRESH = ["1 minute", "5 minutes", "15 minutes", "Hourly", "Daily", "On demand"];
+      const CFG_REFRESH = [
+        "1 minute",
+        "5 minutes",
+        "15 minutes",
+        "Hourly",
+        "Daily",
+        "On demand",
+      ];
 
       // Suggested KPIs when an asset is added. All editable afterwards.
       const CFG_ASSET_COMMON = [
@@ -6069,16 +6241,46 @@ h1{font-size:30px;margin:0 0 7px}
         { name: "Remaining life", unit: "%" },
       ];
       const CFG_ASSET_EXTRA = {
-        KILN: [["Shell temperature", "\u00b0C"], ["Main drive current", "A"]],
-        VRM: [["Vibration", "mm/s"], ["Main drive power", "kW"]],
-        BM: [["Vibration", "mm/s"], ["Main drive power", "kW"]],
-        CLg: [["Undergrate pressure", "mbar"], ["Grate drive current", "A"]],
-        CR: [["Motor current", "A"], ["Vibration", "mm/s"]],
-        FAN: [["Vibration", "mm/s"], ["Bearing temperature", "\u00b0C"]],
-        BE: [["Motor current", "A"], ["Bearing temperature", "\u00b0C"]],
-        BC: [["Motor current", "A"], ["Belt speed", "m/s"]],
-        CP: [["Discharge pressure", "bar"], ["Motor current", "A"]],
-        CAM: [["Online status", ""], ["Uptime", "%"]],
+        KILN: [
+          ["Shell temperature", "\u00b0C"],
+          ["Main drive current", "A"],
+        ],
+        VRM: [
+          ["Vibration", "mm/s"],
+          ["Main drive power", "kW"],
+        ],
+        BM: [
+          ["Vibration", "mm/s"],
+          ["Main drive power", "kW"],
+        ],
+        CLg: [
+          ["Undergrate pressure", "mbar"],
+          ["Grate drive current", "A"],
+        ],
+        CR: [
+          ["Motor current", "A"],
+          ["Vibration", "mm/s"],
+        ],
+        FAN: [
+          ["Vibration", "mm/s"],
+          ["Bearing temperature", "\u00b0C"],
+        ],
+        BE: [
+          ["Motor current", "A"],
+          ["Bearing temperature", "\u00b0C"],
+        ],
+        BC: [
+          ["Motor current", "A"],
+          ["Belt speed", "m/s"],
+        ],
+        CP: [
+          ["Discharge pressure", "bar"],
+          ["Motor current", "A"],
+        ],
+        CAM: [
+          ["Online status", ""],
+          ["Uptime", "%"],
+        ],
       };
       function cfgSuggest(abbr) {
         return CFG_ASSET_COMMON.concat(
@@ -6099,10 +6301,12 @@ h1{font-size:30px;margin:0 0 7px}
         addedAssets: {}, // assets added to built-in plants
         plantKpis: {}, // hac -> [kpi]
         assetKpis: {}, // asset id -> [kpi]
+        globalKpis: [], // KPIs shown on the Global Overview page
       };
       const cfgUid = () =>
         "k" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      const cfgUnset = (k) => !k.source || !k.source.type || k.source.type === "unset";
+      const cfgUnset = (k) =>
+        !k.source || !k.source.type || k.source.type === "unset";
 
       function cfgSave() {
         try {
@@ -6138,6 +6342,7 @@ h1{font-size:30px;margin:0 0 7px}
         CFG.library = saved.library || [];
         CFG.plantKpis = saved.plantKpis || {};
         CFG.assetKpis = saved.assetKpis || {};
+        CFG.globalKpis = saved.globalKpis || [];
         CFG.customPlants = saved.customPlants || {};
         CFG.addedAssets = saved.addedAssets || {};
         CFG.library.forEach(cfgRegisterType);
@@ -6193,7 +6398,10 @@ h1{font-size:30px;margin:0 0 7px}
         if (v == null || v === "")
           return '<span class="mv" title="No live value yet">\u2014</span>';
         const u = k.unit
-          ? (k.unit.charAt(0) === "%" ? "" : " ") + "<small>" + esc(k.unit) + "</small>"
+          ? (k.unit.charAt(0) === "%" ? "" : " ") +
+            "<small>" +
+            esc(k.unit) +
+            "</small>"
           : "";
         const style =
           k.tone === "amber"
@@ -6246,11 +6454,27 @@ h1{font-size:30px;margin:0 0 7px}
       }
       function cfgPlaceOnMap(p, used) {
         const base = cfgMapXY(p.lat, p.lon);
-        const offsets = [[0, 0], [0, 12], [0, -12], [13, 0], [-13, 0], [13, 12], [-13, 12], [13, -12], [-13, -12], [0, 24], [0, -24]];
+        const offsets = [
+          [0, 0],
+          [0, 12],
+          [0, -12],
+          [13, 0],
+          [-13, 0],
+          [13, 12],
+          [-13, 12],
+          [13, -12],
+          [-13, -12],
+          [0, 24],
+          [0, -24],
+        ];
         for (const [dx, dy] of offsets) {
           const c = { x: base.x + dx, y: base.y + dy };
           if (c.x < 8 || c.x > 92 || c.y < 8 || c.y > 92) continue;
-          if (!used.some((u) => Math.abs(u.x - c.x) < 12.5 && Math.abs(u.y - c.y) < 11.5)) {
+          if (
+            !used.some(
+              (u) => Math.abs(u.x - c.x) < 12.5 && Math.abs(u.y - c.y) < 11.5,
+            )
+          ) {
             used.push(c);
             return c;
           }
@@ -6285,13 +6509,18 @@ h1{font-size:30px;margin:0 0 7px}
           const hit =
             !q ||
             [p.name, p.hac, p.country, p.region].some((v) =>
-              String(v || "").toLowerCase().includes(q),
+              String(v || "")
+                .toLowerCase()
+                .includes(q),
             );
           if (!hit) return;
           shown++;
-          ((tree[p.region || "Other"] ||= {})[p.country || "Other"] ||= []).push(p);
+          ((tree[p.region || "Other"] ||= {})[p.country || "Other"] ||=
+            []).push(p);
         });
-        $id("plantCount").textContent = q ? `${shown} of ${all.length}` : String(all.length);
+        $id("plantCount").textContent = q
+          ? `${shown} of ${all.length}`
+          : String(all.length);
         $id("plantSearchClear").hidden = !navQuery;
 
         if (!shown) {
@@ -6303,7 +6532,9 @@ h1{font-size:30px;margin:0 0 7px}
         const stName = { ok: "Optimal", warn: "Watch", crit: "Critical" };
         let h = "";
         Object.keys(tree)
-          .sort((a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b))
+          .sort(
+            (a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b),
+          )
           .forEach((r) => {
             const rKey = "r:" + r;
             const rOpen = !navCollapsed.has(rKey);
@@ -6316,7 +6547,9 @@ h1{font-size:30px;margin:0 0 7px}
                 .forEach((c) => {
                   const cKey = "c:" + r + "|" + c;
                   const cOpen = !navCollapsed.has(cKey);
-                  const list = tree[r][c].sort((a, b) => a.name.localeCompare(b.name));
+                  const list = tree[r][c].sort((a, b) =>
+                    a.name.localeCompare(b.name),
+                  );
                   h += `<div><button type="button" class="pt-row pt-country" data-toggle="${esc(cKey)}" aria-expanded="${cOpen}"><span class="pt-chev" aria-hidden="true">\u25be</span><span class="pt-label">${esc(c)}</span><span class="pt-n">${list.length}</span></button>`;
                   if (cOpen) {
                     h += '<div class="pt-kids">';
@@ -6373,8 +6606,14 @@ h1{font-size:30px;margin:0 0 7px}
       })();
       function syncNav() {
         const page = document.querySelector(".page.on");
-        $id("navHome").classList.toggle("on", !!page && page.id === "pgOverview");
-        $id("navConfig").classList.toggle("on", !!page && page.id === "pgConfig");
+        $id("navHome").classList.toggle(
+          "on",
+          !!page && page.id === "pgOverview",
+        );
+        $id("navConfig").classList.toggle(
+          "on",
+          !!page && page.id === "pgConfig",
+        );
         initNav();
       }
       // Anything derived from PLANTS is refreshed here after a config change.
@@ -6382,7 +6621,8 @@ h1{font-size:30px;margin:0 0 7px}
         initNav();
         initPlantNetworkMap();
         const pm = $id("pmSearch");
-        if (pm && pm.value && window.filterPlantMap) window.filterPlantMap(pm.value);
+        if (pm && pm.value && window.filterPlantMap)
+          window.filterPlantMap(pm.value);
         if (ssGlobe) {
           try {
             ssGlobe.renderer.dispose();
@@ -6395,17 +6635,28 @@ h1{font-size:30px;margin:0 0 7px}
       /* =====================================================================
          CONFIGURATION PAGE
          ===================================================================== */
-      const cfgState = { hac: null, tab: "assets", plantQuery: "", assetQuery: "", assetType: "ALL", open: new Set() };
+      const cfgState = {
+        hac: null,
+        tab: "assets",
+        plantQuery: "",
+        assetQuery: "",
+        assetType: "ALL",
+        open: new Set(),
+      };
       const cfgFirstHac = () => {
         const l = Object.values(PLANTS).sort(
-          (a, b) => cfgRegionRank(a.region) - cfgRegionRank(b.region) || a.name.localeCompare(b.name),
+          (a, b) =>
+            cfgRegionRank(a.region) - cfgRegionRank(b.region) ||
+            a.name.localeCompare(b.name),
         );
         return l.length ? l[0].hac : null;
       };
       function openConfig(hac) {
         $id("drawer").classList.remove("open");
         $id("apanel").classList.remove("open");
-        document.querySelectorAll(".page").forEach((p) => p.classList.remove("on"));
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("on"));
         $id("pgConfig").classList.add("on");
         $id("topTitle").textContent = "Configuration";
         navActiveHac = null;
@@ -6415,25 +6666,82 @@ h1{font-size:30px;margin:0 0 7px}
         renderConfig();
         window.scrollTo(0, 0);
       }
+      function cfgGlobalKpis() {
+        return CFG.globalKpis || (CFG.globalKpis = []);
+      }
+      function cfgGlobalKpiSourceLabel(k) {
+        const s = k.source || {};
+        const t = CFG_SOURCES[s.type];
+        if (!t) return "Source not set";
+        return t.label + (s.ref ? " · " + s.ref : "");
+      }
+      function renderConfiguredGlobalKpis() {
+        const host = $id("configuredGlobalKpis");
+        if (!host) return;
+        const list = cfgGlobalKpis();
+        if (!list.length) {
+          host.hidden = true;
+          host.innerHTML = "";
+          return;
+        }
+        host.hidden = false;
+        host.innerHTML = list
+          .map((k) => {
+            const unit = k.unit ? `<small>${esc(k.unit)}</small>` : "";
+            const value = k.displayValue || "—";
+            return `<div class="kpi"><div class="lbl">${esc(k.name)}</div><div class="val">${esc(value)}${unit ? " " + unit : ""}</div><div class="global-kpi-source">${esc(cfgGlobalKpiSourceLabel(k))}</div></div>`;
+          })
+          .join("");
+      }
+
       function renderConfig() {
         renderCfgList();
         renderCfgDetail();
+        renderCfgGlobalSection();
+      }
+      function renderCfgGlobalSection() {
+        const detail = $id("cfgDetail");
+        if (!detail) return;
+        let section = $id("cfgGlobalSection");
+        if (!section) {
+          section = document.createElement("section");
+          section.id = "cfgGlobalSection";
+          section.className = "cfg-global-section";
+          const layout = document.querySelector(".cfg-layout");
+          layout.parentNode.insertBefore(section, layout);
+        }
+        const list = cfgGlobalKpis();
+        section.innerHTML = `<div class="cfg-global-head"><h3>Global Overview KPIs</h3><span class="grow"></span><button type="button" class="cfg-btn primary" data-act="add-global-kpi">Add KPI</button></div>
+          <div class="cfg-global-note">Configure KPIs that are displayed on the Global Overview page. Existing built-in overview KPIs remain unchanged.</div>
+          <div class="cfg-global-list">${list.length ? list.map((k) => `<div class="cfg-global-row"><div class="g-name">${esc(k.name)}</div><div>${esc(k.unit || "—")}</div><div class="g-source"><span class="g-meta">${esc(cfgGlobalKpiSourceLabel(k))}</span></div><div class="g-actions"><button type="button" class="cfg-btn sm" data-act="edit-global-kpi" data-kid="${esc(k.id)}">Edit</button> <button type="button" class="cfg-btn sm ghost" data-act="del-global-kpi" data-kid="${esc(k.id)}">Remove</button></div></div>`).join("") : `<div class="cfg-empty" style="margin:0"><b>No Global Overview KPIs yet</b><p>Add a KPI here without changing the existing overview data.</p></div>`}</div>`;
       }
 
       function renderCfgList() {
         const q = cfgState.plantQuery.trim().toLowerCase();
         const groups = {};
         Object.values(PLANTS).forEach((p) => {
-          if (q && ![p.name, p.hac, p.country, p.region].some((v) => String(v).toLowerCase().includes(q))) return;
+          if (
+            q &&
+            ![p.name, p.hac, p.country, p.region].some((v) =>
+              String(v).toLowerCase().includes(q),
+            )
+          )
+            return;
           (groups[p.region || "Other"] ||= []).push(p);
         });
         let h = "";
         Object.keys(groups)
-          .sort((a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b))
+          .sort(
+            (a, b) => cfgRegionRank(a) - cfgRegionRank(b) || a.localeCompare(b),
+          )
           .forEach((r) => {
             h += `<div class="cfg-region">${esc(r)}</div>`;
             groups[r]
-              .sort((a, b) => a.country.localeCompare(b.country) || a.name.localeCompare(b.name))
+              .sort(
+                (a, b) =>
+                  a.country.localeCompare(b.country) ||
+                  a.name.localeCompare(b.name),
+              )
               .forEach((p) => {
                 const on = p.hac === cfgState.hac;
                 h += `<button type="button" class="cfg-plant${on ? " on" : ""}" data-act="pick-plant" data-hac="${esc(p.hac)}"${on ? ' aria-current="true"' : ""}>
@@ -6444,7 +6752,9 @@ h1{font-size:30px;margin:0 0 7px}
         $id("cfgPlantList").innerHTML =
           h ||
           `<div class="cfg-list-empty">${
-            q ? `No plants match \u201c${esc(cfgState.plantQuery.trim())}\u201d.` : "No plants yet. Use Add plant to create the first one."
+            q
+              ? `No plants match \u201c${esc(cfgState.plantQuery.trim())}\u201d.`
+              : "No plants yet. Use Add plant to create the first one."
           }</div>`;
       }
 
@@ -6484,14 +6794,17 @@ h1{font-size:30px;margin:0 0 7px}
       }
 
       function cfgSourceCell(s) {
-        if (!s || !s.type || s.type === "unset") return '<span class="cfg-chip warn">Source not set</span>';
+        if (!s || !s.type || s.type === "unset")
+          return '<span class="cfg-chip warn">Source not set</span>';
         const t = CFG_SOURCES[s.type];
         if (!t) return '<span class="cfg-chip warn">Source not set</span>';
-        if (s.type === "demo") return `<span class="cfg-chip mute">${esc(t.label)}</span>`;
+        if (s.type === "demo")
+          return `<span class="cfg-chip mute">${esc(t.label)}</span>`;
         return `<b>${esc(t.label)}</b>${s.ref ? `<code>${esc(s.ref)}</code>` : ""}`;
       }
       function cfgKpiRow(k, scopeAttrs) {
-        const refresh = k.source && k.source.refresh ? k.source.refresh : "\u2014";
+        const refresh =
+          k.source && k.source.refresh ? k.source.refresh : "\u2014";
         return `<div class="kt-row">
           <div class="kt-name">${esc(k.name)}</div>
           <div class="kt-unit">${esc(k.unit || "\u2014")}</div>
@@ -6511,7 +6824,10 @@ h1{font-size:30px;margin:0 0 7px}
             bar +
             `<div class="cfg-empty"><b>No plant KPIs yet</b><p>Add KPIs for Production, Maintenance, Energy and Sustainability, and choose where each one gets its data.</p></div>`
           );
-        const groups = CFG_PILLARS.map((pl) => ({ pl, items: list.filter((k) => k.pillar === pl.id) })).filter((g) => g.items.length);
+        const groups = CFG_PILLARS.map((pl) => ({
+          pl,
+          items: list.filter((k) => k.pillar === pl.id),
+        })).filter((g) => g.items.length);
         return (
           bar +
           '<div class="kt">' +
@@ -6531,7 +6847,8 @@ h1{font-size:30px;margin:0 0 7px}
         if (!p.assets.length)
           return `<div class="cfg-empty"><b>Add the first asset to ${esc(p.name)}</b><p>Pick an asset from the library or create a new asset type, then define the KPIs for each asset and where they get their data.</p><button type="button" class="cfg-btn primary" data-act="add-asset">Add asset</button></div>`;
         const types = [...new Set(p.assets.map((a) => a.abbr))];
-        if (cfgState.assetType !== "ALL" && !types.includes(cfgState.assetType)) cfgState.assetType = "ALL";
+        if (cfgState.assetType !== "ALL" && !types.includes(cfgState.assetType))
+          cfgState.assetType = "ALL";
         return `<div class="cfg-toolbar">
             <input id="cfgAssetSearch" class="cfg-input" type="search" placeholder="Search assets" aria-label="Search assets" autocomplete="off" value="${esc(cfgState.assetQuery)}" />
             <select id="cfgAssetType" class="cfg-select" aria-label="Filter by asset type">
@@ -6549,10 +6866,15 @@ h1{font-size:30px;margin:0 0 7px}
           .filter(
             (a) =>
               (cfgState.assetType === "ALL" || a.abbr === cfgState.assetType) &&
-              (!q || a.id.toLowerCase().includes(q) || String(a.machine).toLowerCase().includes(q)),
+              (!q ||
+                a.id.toLowerCase().includes(q) ||
+                String(a.machine).toLowerCase().includes(q)),
           )
-          .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
-        if (!rows.length) return '<div class="empty-note">No assets match.</div>';
+          .sort((a, b) =>
+            a.id.localeCompare(b.id, undefined, { numeric: true }),
+          );
+        if (!rows.length)
+          return '<div class="empty-note">No assets match.</div>';
         return rows
           .map((a) => {
             const open = cfgState.open.has(a.id);
@@ -6565,7 +6887,9 @@ h1{font-size:30px;margin:0 0 7px}
               const attrs = `data-scope="asset" data-aid="${esc(a.id)}"`;
               body = `<div class="ar-b">
                 <div class="cfg-toolbar"><span class="cfg-tip">KPIs for ${esc(a.id)}</span><span class="grow"></span>${
-                  a.custom ? `<button type="button" class="cfg-btn sm danger" data-act="del-asset" data-aid="${esc(a.id)}">Remove asset</button>` : ""
+                  a.custom
+                    ? `<button type="button" class="cfg-btn sm danger" data-act="del-asset" data-aid="${esc(a.id)}">Remove asset</button>`
+                    : ""
                 }<button type="button" class="cfg-btn sm primary" data-act="add-kpi" ${attrs}>Add KPI</button></div>
                 ${
                   list.length
@@ -6586,9 +6910,23 @@ h1{font-size:30px;margin:0 0 7px}
         if (!t) return;
         const p = PLANTS[cfgState.hac];
         switch (t.dataset.act) {
-          case "add-plant": return cfgPlantDialog(false);
-          case "edit-plant": return cfgPlantDialog(true);
-          case "delete-plant": return cfgDeletePlant(p);
+          case "global-kpis":
+            return $id("cfgGlobalSection")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          case "add-global-kpi":
+            return cfgGlobalKpiDialog(null);
+          case "edit-global-kpi":
+            return cfgGlobalKpiDialog(t.dataset.kid);
+          case "del-global-kpi":
+            return cfgDeleteGlobalKpi(t.dataset.kid);
+          case "add-plant":
+            return cfgPlantDialog(false);
+          case "edit-plant":
+            return cfgPlantDialog(true);
+          case "delete-plant":
+            return cfgDeletePlant(p);
           case "pick-plant":
             cfgState.hac = t.dataset.hac;
             cfgState.tab = "assets";
@@ -6601,18 +6939,28 @@ h1{font-size:30px;margin:0 0 7px}
             return renderCfgDetail();
           case "toggle-asset": {
             const id = t.dataset.aid;
-            cfgState.open.has(id) ? cfgState.open.delete(id) : cfgState.open.add(id);
+            cfgState.open.has(id)
+              ? cfgState.open.delete(id)
+              : cfgState.open.add(id);
             $id("cfgAssetList").innerHTML = cfgAssetRows(p);
-            const again = $id("cfgAssetList").querySelector(`[data-act="toggle-asset"][data-aid="${id}"]`);
+            const again = $id("cfgAssetList").querySelector(
+              `[data-act="toggle-asset"][data-aid="${id}"]`,
+            );
             if (again) again.focus();
             return;
           }
-          case "add-asset": return cfgAssetDialog();
-          case "del-asset": return cfgDeleteAsset(p, t.dataset.aid);
-          case "add-kpi": return cfgKpiDialog(t.dataset.scope, t.dataset.aid, null);
-          case "edit-kpi": return cfgKpiDialog(t.dataset.scope, t.dataset.aid, t.dataset.kid);
-          case "del-kpi": return cfgDeleteKpi(t.dataset.scope, t.dataset.aid, t.dataset.kid);
-          case "reset": return cfgReset();
+          case "add-asset":
+            return cfgAssetDialog();
+          case "del-asset":
+            return cfgDeleteAsset(p, t.dataset.aid);
+          case "add-kpi":
+            return cfgKpiDialog(t.dataset.scope, t.dataset.aid, null);
+          case "edit-kpi":
+            return cfgKpiDialog(t.dataset.scope, t.dataset.aid, t.dataset.kid);
+          case "del-kpi":
+            return cfgDeleteKpi(t.dataset.scope, t.dataset.aid, t.dataset.kid);
+          case "reset":
+            return cfgReset();
         }
       });
       $id("cfgPlantSearch").addEventListener("input", (e) => {
@@ -6650,7 +6998,9 @@ h1{font-size:30px;margin:0 0 7px}
         const e = f.querySelector(".cfg-err");
         e.textContent = msg;
         e.hidden = false;
-        f.querySelectorAll("input,select").forEach((c) => c.setAttribute("aria-invalid", "true"));
+        f.querySelectorAll("input,select").forEach((c) =>
+          c.setAttribute("aria-invalid", "true"),
+        );
       }
       function cfgClearField(f) {
         if (!f) return;
@@ -6658,7 +7008,9 @@ h1{font-size:30px;margin:0 0 7px}
         const er = f.querySelector(".cfg-err");
         er.hidden = true;
         er.textContent = "";
-        f.querySelectorAll("[aria-invalid]").forEach((c) => c.removeAttribute("aria-invalid"));
+        f.querySelectorAll("[aria-invalid]").forEach((c) =>
+          c.removeAttribute("aria-invalid"),
+        );
       }
       function cfgClearErrs(form) {
         form.querySelectorAll(".cfg-field.bad").forEach((f) => {
@@ -6666,7 +7018,9 @@ h1{font-size:30px;margin:0 0 7px}
           const e = f.querySelector(".cfg-err");
           e.hidden = true;
           e.textContent = "";
-          f.querySelectorAll("[aria-invalid]").forEach((c) => c.removeAttribute("aria-invalid"));
+          f.querySelectorAll("[aria-invalid]").forEach((c) =>
+            c.removeAttribute("aria-invalid"),
+          );
         });
       }
       function cfgOpenModal(o) {
@@ -6684,25 +7038,38 @@ h1{font-size:30px;margin:0 0 7px}
           e.preventDefault();
           cfgClearErrs(form);
           if (o.onSubmit(form) === false) {
-            const bad = form.querySelector(".cfg-field.bad input, .cfg-field.bad select");
+            const bad = form.querySelector(
+              ".cfg-field.bad input, .cfg-field.bad select",
+            );
             if (bad) bad.focus();
             return;
           }
           cfgCloseModal();
         });
-        m.querySelector("[data-close]").addEventListener("click", cfgCloseModal);
-        const clearField = (e) => cfgClearField(e.target.closest && e.target.closest(".cfg-field.bad"));
+        m.querySelector("[data-close]").addEventListener(
+          "click",
+          cfgCloseModal,
+        );
+        const clearField = (e) =>
+          cfgClearField(e.target.closest && e.target.closest(".cfg-field.bad"));
         form.addEventListener("input", clearField);
         form.addEventListener("change", clearField);
         if (o.onOpen) o.onOpen(form);
-        const first = form.querySelector("input:not([disabled]):not([type=hidden]), select:not([disabled])");
+        const first = form.querySelector(
+          "input:not([disabled]):not([type=hidden]), select:not([disabled])",
+        );
         (first || form.querySelector("button[type=submit]")).focus();
       }
       function cfgCloseModal() {
         const m = $id("cfgModal");
         m.classList.remove("on");
         m.innerHTML = "";
-        if (cfgLastFocus && document.contains(cfgLastFocus) && cfgLastFocus.focus) cfgLastFocus.focus();
+        if (
+          cfgLastFocus &&
+          document.contains(cfgLastFocus) &&
+          cfgLastFocus.focus
+        )
+          cfgLastFocus.focus();
       }
       document.addEventListener("keydown", (e) => {
         const m = $id("cfgModal");
@@ -6711,9 +7078,12 @@ h1{font-size:30px;margin:0 0 7px}
           e.preventDefault();
           cfgCloseModal();
         } else if (e.key === "Tab") {
-          const f = [...m.querySelectorAll("input,select,button")].filter((x) => !x.disabled && !x.hidden && x.offsetParent !== null);
+          const f = [...m.querySelectorAll("input,select,button")].filter(
+            (x) => !x.disabled && !x.hidden && x.offsetParent !== null,
+          );
           if (!f.length) return;
-          const first = f[0], last = f[f.length - 1];
+          const first = f[0],
+            last = f[f.length - 1];
           if (e.shiftKey && document.activeElement === first) {
             e.preventDefault();
             last.focus();
@@ -6751,33 +7121,107 @@ h1{font-size:30px;margin:0 0 7px}
       function cfgPlantDialog(edit) {
         const cur = edit ? PLANTS[cfgState.hac] : null;
         const regionOpts = cfgRegions()
-          .map((r) => `<option value="${esc(r)}"${cur && cur.region === r ? " selected" : ""}>${esc(r)}</option>`)
+          .map(
+            (r) =>
+              `<option value="${esc(r)}"${cur && cur.region === r ? " selected" : ""}>${esc(r)}</option>`,
+          )
           .join("");
         cfgOpenModal({
           title: edit ? "Edit plant details" : "Add plant",
-          sub: edit ? null : "Choose where the plant sits, then name it. You can add its assets and KPIs right after.",
+          sub: edit
+            ? null
+            : "Choose where the plant sits, then name it. You can add its assets and KPIs right after.",
           submit: edit ? "Save changes" : "Add plant",
           body:
-            cfgFld("region", "Region", `<select id="f_region" name="region"><option value="">Select a region</option>${regionOpts}</select>`) +
-            cfgFld("country", "Country", `<select id="f_country" name="country"${cur ? "" : " disabled"}><option value="">Select a region first</option></select>`) +
-            cfgFld("countryOther", "Country name", '<input type="text" id="f_countryOther" name="countryOther" maxlength="40" autocomplete="off" />', null, true) +
-            cfgFld("name", "Plant name", '<input type="text" id="f_name" name="name" maxlength="40" autocomplete="off" placeholder="e.g. Agadir" />') +
-            cfgFld("hac", "Plant code", `<input type="text" id="f_hac" name="hac" maxlength="5" autocomplete="off" placeholder="e.g. AGR"${edit ? " disabled" : ""} />`, "Short unique code used in asset IDs, such as AGR.461-KILN. It can\u2019t be changed later.") +
+            cfgFld(
+              "region",
+              "Region",
+              `<select id="f_region" name="region"><option value="">Select a region</option>${regionOpts}</select>`,
+            ) +
+            cfgFld(
+              "country",
+              "Country",
+              `<select id="f_country" name="country"${cur ? "" : " disabled"}><option value="">Select a region first</option></select>`,
+            ) +
+            cfgFld(
+              "countryOther",
+              "Country name",
+              '<input type="text" id="f_countryOther" name="countryOther" maxlength="40" autocomplete="off" />',
+              null,
+              true,
+            ) +
+            cfgFld(
+              "name",
+              "Plant name",
+              '<input type="text" id="f_name" name="name" maxlength="40" autocomplete="off" placeholder="e.g. Agadir" />',
+            ) +
+            cfgFld(
+              "image",
+              "Plant image",
+              '<input type="file" id="f_image" name="image" accept="image/*" />' +
+                (cur && cur.image
+                  ? `<div class="cfg-image-preview"><img id="cfgImagePreview" src="${esc(cur.image)}" alt="Current plant image" /><span>Current image. Choose a new image to replace it.</span></div>`
+                  : '<div class="cfg-image-preview" id="cfgImagePreviewWrap" hidden><img id="cfgImagePreview" src="" alt="Plant image preview" /><span>Selected image preview</span></div>'),
+              "Optional. JPG, PNG or WebP; stored in this browser.",
+            ) +
+            cfgFld(
+              "hac",
+              "Plant code",
+              `<input type="text" id="f_hac" name="hac" maxlength="5" autocomplete="off" placeholder="e.g. AGR"${edit ? " disabled" : ""} />`,
+              "Short unique code used in asset IDs, such as AGR.461-KILN. It can\u2019t be changed later.",
+            ) +
             '<div class="cfg-row2">' +
-            cfgFld("lat", "Latitude", '<input type="text" id="f_lat" name="lat" inputmode="decimal" autocomplete="off" />') +
-            cfgFld("lon", "Longitude", '<input type="text" id="f_lon" name="lon" inputmode="decimal" autocomplete="off" />') +
+            cfgFld(
+              "lat",
+              "Latitude",
+              '<input type="text" id="f_lat" name="lat" inputmode="decimal" autocomplete="off" />',
+            ) +
+            cfgFld(
+              "lon",
+              "Longitude",
+              '<input type="text" id="f_lon" name="lon" inputmode="decimal" autocomplete="off" />',
+            ) +
             '</div><div class="hint" style="margin:-6px 0 8px;font-size:13px;color:var(--ink-3)">Filled in from the country. Adjust to the exact site to place the plant on the map.</div>',
           onOpen(form) {
             const el = (n) => form.elements[n];
             const touched = { hac: !!edit, ll: !!edit };
+            form._imageData = cur && cur.image ? cur.image : "";
+            const imageInput = el("image");
+            if (imageInput)
+              imageInput.addEventListener("change", () => {
+                const file = imageInput.files && imageInput.files[0];
+                if (!file) return;
+                if (!file.type.startsWith("image/")) {
+                  cfgErr(form, "image", "Choose an image file.");
+                  return;
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                  cfgErr(form, "image", "Keep the image under 2 MB.");
+                  imageInput.value = "";
+                  return;
+                }
+                const reader = new FileReader();
+                reader.onload = () => {
+                  form._imageData = String(reader.result || "");
+                  const img = form.querySelector("#cfgImagePreview");
+                  const wrap = form.querySelector("#cfgImagePreviewWrap");
+                  if (img) img.src = form._imageData;
+                  if (wrap) wrap.hidden = false;
+                };
+                reader.readAsDataURL(file);
+              });
             const fillCountries = (region, selected) => {
               const list = cfgCountryList(region);
               el("country").innerHTML =
                 '<option value="">Select a country</option>' +
-                list.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join("") +
+                list
+                  .map((c) => `<option value="${esc(c)}">${esc(c)}</option>`)
+                  .join("") +
                 '<option value="__other">Other country\u2026</option>';
               el("country").disabled = !region;
-              if (!region) el("country").innerHTML = '<option value="">Select a region first</option>';
+              if (!region)
+                el("country").innerHTML =
+                  '<option value="">Select a region first</option>';
               if (selected) el("country").value = selected;
             };
             if (cur) {
@@ -6790,11 +7234,15 @@ h1{font-size:30px;margin:0 0 7px}
             el("region").addEventListener("change", () => {
               fillCountries(el("region").value);
               form.querySelector('[data-f="countryOther"]').hidden = true;
-              if (!touched.ll) { el("lat").value = ""; el("lon").value = ""; }
+              if (!touched.ll) {
+                el("lat").value = "";
+                el("lon").value = "";
+              }
             });
             el("country").addEventListener("change", () => {
               const v = el("country").value;
-              form.querySelector('[data-f="countryOther"]').hidden = v !== "__other";
+              form.querySelector('[data-f="countryOther"]').hidden =
+                v !== "__other";
               if (v === "__other") el("countryOther").focus();
               const ll = cfgCountryLL(el("region").value, v);
               if (ll && !touched.ll) {
@@ -6812,9 +7260,13 @@ h1{font-size:30px;margin:0 0 7px}
             });
             el("hac").addEventListener("input", () => {
               touched.hac = true;
-              el("hac").value = el("hac").value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+              el("hac").value = el("hac")
+                .value.toUpperCase()
+                .replace(/[^A-Z0-9]/g, "");
             });
-            ["lat", "lon"].forEach((n) => el(n).addEventListener("input", () => (touched.ll = true)));
+            ["lat", "lon"].forEach((n) =>
+              el(n).addEventListener("input", () => (touched.ll = true)),
+            );
           },
           onSubmit(form) {
             const v = (n) => form.elements[n].value.trim();
@@ -6825,34 +7277,70 @@ h1{font-size:30px;margin:0 0 7px}
             const hac = v("hac").toUpperCase();
             const lat = parseFloat(v("lat").replace(",", "."));
             const lon = parseFloat(v("lon").replace(",", "."));
+            const image = form._imageData || "";
             let bad = false;
-            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
+            const err = (f, m) => {
+              cfgErr(form, f, m);
+              bad = true;
+            };
             if (!region) err("region", "Select a region.");
             if (!sel) err("country", "Select a country.");
             else if (sel === "__other") {
               if (!country) err("countryOther", "Enter the country name.");
-              else if (!CFG_NAME_RE.test(country)) err("countryOther", CFG_NAME_MSG);
+              else if (!CFG_NAME_RE.test(country))
+                err("countryOther", CFG_NAME_MSG);
             }
             if (!name) err("name", "Enter a plant name.");
             else if (!CFG_NAME_RE.test(name)) err("name", CFG_NAME_MSG);
-            else if (country && Object.values(PLANTS).some((x) => x !== cur && String(x.country).toLowerCase() === country.toLowerCase() && x.name.toLowerCase() === name.toLowerCase()))
-              err("name", `There is already a plant called ${name} in ${country}.`);
+            else if (
+              country &&
+              Object.values(PLANTS).some(
+                (x) =>
+                  x !== cur &&
+                  String(x.country).toLowerCase() === country.toLowerCase() &&
+                  x.name.toLowerCase() === name.toLowerCase(),
+              )
+            )
+              err(
+                "name",
+                `There is already a plant called ${name} in ${country}.`,
+              );
             if (!edit) {
               if (!hac) err("hac", "Enter a plant code.");
-              else if (!/^[A-Z][A-Z0-9]{1,4}$/.test(hac)) err("hac", "Use 2 to 5 letters or numbers, starting with a letter.");
-              else if (PLANTS[hac]) err("hac", `${hac} is already used by ${PLANTS[hac].name}.`);
+              else if (!/^[A-Z][A-Z0-9]{1,4}$/.test(hac))
+                err(
+                  "hac",
+                  "Use 2 to 5 letters or numbers, starting with a letter.",
+                );
+              else if (PLANTS[hac])
+                err("hac", `${hac} is already used by ${PLANTS[hac].name}.`);
             }
-            if (!isFinite(lat) || lat < -90 || lat > 90) err("lat", "Enter a latitude between -90 and 90.");
-            if (!isFinite(lon) || lon < -180 || lon > 180) err("lon", "Enter a longitude between -180 and 180.");
+            if (!isFinite(lat) || lat < -90 || lat > 90)
+              err("lat", "Enter a latitude between -90 and 90.");
+            if (!isFinite(lon) || lon < -180 || lon > 180)
+              err("lon", "Enter a longitude between -180 and 180.");
             if (bad) return false;
 
             if (edit) {
-              Object.assign(cur, { region, country, name, lat, lon });
+              Object.assign(cur, { region, country, name, lat, lon, image });
               cfgSave();
               plantsChanged();
               cfgToast("Plant details saved");
             } else {
-              const plant = { hac, region, country, name, lat, lon, st: "ok", counts: {}, assetCount: 0, assets: [], custom: true };
+              const plant = {
+                hac,
+                region,
+                country,
+                name,
+                lat,
+                lon,
+                image,
+                st: "ok",
+                counts: {},
+                assetCount: 0,
+                assets: [],
+                custom: true,
+              };
               PLANTS[hac] = plant;
               CFG.customPlants[hac] = plant;
               cfgSave();
@@ -6903,12 +7391,33 @@ h1{font-size:30px;margin:0 0 7px}
           submit: "Add asset",
           wide: true,
           body:
-            cfgFld("lib", "Asset type", `<select id="f_lib" name="lib"><option value="">Select from the asset library</option>${lib.map((t) => `<option value="${esc(t.abbr)}">${esc(t.name)} (${esc(t.abbr)})</option>`).join("")}<option value="__new">Create a new asset type\u2026</option></select>`) +
+            cfgFld(
+              "lib",
+              "Asset type",
+              `<select id="f_lib" name="lib"><option value="">Select from the asset library</option>${lib.map((t) => `<option value="${esc(t.abbr)}">${esc(t.name)} (${esc(t.abbr)})</option>`).join("")}<option value="__new">Create a new asset type\u2026</option></select>`,
+            ) +
             '<div class="cfg-row2">' +
-            cfgFld("newName", "New asset type name", '<input type="text" id="f_newName" name="newName" maxlength="40" autocomplete="off" placeholder="e.g. Screw Conveyor" />', null, true) +
-            cfgFld("newCode", "Short code", '<input type="text" id="f_newCode" name="newCode" maxlength="5" autocomplete="off" placeholder="e.g. SCR" />', "2 to 5 letters or numbers. Saved to the library for every plant.", true) +
+            cfgFld(
+              "newName",
+              "New asset type name",
+              '<input type="text" id="f_newName" name="newName" maxlength="40" autocomplete="off" placeholder="e.g. Screw Conveyor" />',
+              null,
+              true,
+            ) +
+            cfgFld(
+              "newCode",
+              "Short code",
+              '<input type="text" id="f_newCode" name="newCode" maxlength="5" autocomplete="off" placeholder="e.g. SCR" />',
+              "2 to 5 letters or numbers. Saved to the library for every plant.",
+              true,
+            ) +
             "</div>" +
-            cfgFld("code", "Asset code in this plant", '<input type="text" id="f_code" name="code" maxlength="30" autocomplete="off" placeholder="e.g. 461-KILN" />', `<span id="idPreview">Asset ID: ${esc(p.hac)}.\u2026</span>`) +
+            cfgFld(
+              "code",
+              "Asset code in this plant",
+              '<input type="text" id="f_code" name="code" maxlength="30" autocomplete="off" placeholder="e.g. 461-KILN" />',
+              `<span id="idPreview">Asset ID: ${esc(p.hac)}.\u2026</span>`,
+            ) +
             '<div class="cfg-field" data-f="kpis"><label>KPIs to start with</label><div id="kpiChecks" class="cfg-checks"><div class="cfg-check" style="color:var(--ink-3)">Select an asset type to see suggested KPIs.</div></div><div class="hint">Suggested from the asset type. Set each KPI\u2019s data source after adding the asset.</div></div>',
           onOpen(form) {
             const el = (n) => form.elements[n];
@@ -6918,7 +7427,12 @@ h1{font-size:30px;margin:0 0 7px}
               const abbr = t === "__new" ? "" : t;
               sugg = t ? cfgSuggest(abbr) : [];
               $id("kpiChecks").innerHTML = sugg.length
-                ? sugg.map((k, i) => `<label class="cfg-check"><input type="checkbox" name="kpi" value="${i}" checked /> ${esc(k.name)} <span class="mute">${esc(k.unit)}</span></label>`).join("")
+                ? sugg
+                    .map(
+                      (k, i) =>
+                        `<label class="cfg-check"><input type="checkbox" name="kpi" value="${i}" checked /> ${esc(k.name)} <span class="mute">${esc(k.unit)}</span></label>`,
+                    )
+                    .join("")
                 : '<div class="cfg-check" style="color:var(--ink-3)">Select an asset type to see suggested KPIs.</div>';
             };
             form._sugg = () => sugg;
@@ -6931,32 +7445,65 @@ h1{font-size:30px;margin:0 0 7px}
             });
             el("code").addEventListener("input", () => {
               const c = el("code").value.trim();
-              $id("idPreview").textContent = `Asset ID: ${p.hac}.${c || "\u2026"}`;
+              $id("idPreview").textContent =
+                `Asset ID: ${p.hac}.${c || "\u2026"}`;
             });
-            el("newCode").addEventListener("input", () => (el("newCode").value = el("newCode").value.replace(/[^A-Za-z0-9]/g, "")));
+            el("newCode").addEventListener(
+              "input",
+              () =>
+                (el("newCode").value = el("newCode").value.replace(
+                  /[^A-Za-z0-9]/g,
+                  "",
+                )),
+            );
           },
           onSubmit(form) {
             const v = (n) => form.elements[n].value.trim();
             const t = v("lib");
             const code = v("code");
             let bad = false;
-            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
-            let abbr = t, machine = "";
+            const err = (f, m) => {
+              cfgErr(form, f, m);
+              bad = true;
+            };
+            let abbr = t,
+              machine = "";
             if (!t) err("lib", "Select an asset type.");
             else if (t === "__new") {
-              const nn = v("newName"), nc = v("newCode");
+              const nn = v("newName"),
+                nc = v("newCode");
               if (!nn) err("newName", "Enter a name for the new asset type.");
               else if (!CFG_NAME_RE.test(nn)) err("newName", CFG_NAME_MSG);
-              else if (lib.some((x) => x.name.toLowerCase() === nn.toLowerCase())) err("newName", "This type is already in the library. Choose it from the list instead.");
+              else if (
+                lib.some((x) => x.name.toLowerCase() === nn.toLowerCase())
+              )
+                err(
+                  "newName",
+                  "This type is already in the library. Choose it from the list instead.",
+                );
               if (!nc) err("newCode", "Enter a short code.");
-              else if (!/^[A-Za-z0-9]{2,5}$/.test(nc)) err("newCode", "Use 2 to 5 letters or numbers.");
-              else if (lib.some((x) => x.abbr.toLowerCase() === nc.toLowerCase())) err("newCode", "This code is already used in the library.");
+              else if (!/^[A-Za-z0-9]{2,5}$/.test(nc))
+                err("newCode", "Use 2 to 5 letters or numbers.");
+              else if (
+                lib.some((x) => x.abbr.toLowerCase() === nc.toLowerCase())
+              )
+                err("newCode", "This code is already used in the library.");
               abbr = nc;
               machine = nn;
             } else machine = (lib.find((x) => x.abbr === t) || {}).name || t;
             if (!code) err("code", "Enter the asset code used in this plant.");
-            else if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,29}$/.test(code)) err("code", "Use letters, numbers, dots, hyphens or underscores, with no spaces.");
-            else if (p.assets.some((a) => a.id.toLowerCase() === (p.hac + "." + code).toLowerCase())) err("code", `${p.hac}.${code} already exists in this plant.`);
+            else if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,29}$/.test(code))
+              err(
+                "code",
+                "Use letters, numbers, dots, hyphens or underscores, with no spaces.",
+              );
+            else if (
+              p.assets.some(
+                (a) =>
+                  a.id.toLowerCase() === (p.hac + "." + code).toLowerCase(),
+              )
+            )
+              err("code", `${p.hac}.${code} already exists in this plant.`);
             if (bad) return false;
 
             if (t === "__new") {
@@ -6964,12 +7511,28 @@ h1{font-size:30px;margin:0 0 7px}
               CFG.library.push(type);
               cfgRegisterType(type);
             }
-            const asset = { id: p.hac + "." + code, code, abbr, machine, risk: null, status: "ok", life: null, custom: true };
+            const asset = {
+              id: p.hac + "." + code,
+              code,
+              abbr,
+              machine,
+              risk: null,
+              status: "ok",
+              life: null,
+              custom: true,
+            };
             p.assets.push(asset);
             if (!p.custom) (CFG.addedAssets[p.hac] ||= []).push(asset);
             cfgRecount(p);
-            const picked = [...form.querySelectorAll('input[name="kpi"]:checked')].map((c) => form._sugg()[Number(c.value)]);
-            CFG.assetKpis[asset.id] = picked.map((k) => ({ id: cfgUid(), name: k.name, unit: k.unit, source: { type: "unset", ref: "", refresh: "" } }));
+            const picked = [
+              ...form.querySelectorAll('input[name="kpi"]:checked'),
+            ].map((c) => form._sugg()[Number(c.value)]);
+            CFG.assetKpis[asset.id] = picked.map((k) => ({
+              id: cfgUid(),
+              name: k.name,
+              unit: k.unit,
+              source: { type: "unset", ref: "", refresh: "" },
+            }));
             cfgSave();
             cfgState.tab = "assets";
             cfgState.assetQuery = "";
@@ -6981,16 +7544,148 @@ h1{font-size:30px;margin:0 0 7px}
         });
       }
       function cfgDeleteAsset(p, id) {
-        cfgConfirm(`Remove ${id}?`, "The asset and its KPIs will be removed. This can\u2019t be undone.", "Remove asset", () => {
-          p.assets = p.assets.filter((a) => a.id !== id);
-          if (CFG.addedAssets[p.hac]) CFG.addedAssets[p.hac] = CFG.addedAssets[p.hac].filter((a) => a.id !== id);
-          delete CFG.assetKpis[id];
-          cfgState.open.delete(id);
-          cfgRecount(p);
-          cfgSave();
-          renderConfig();
-          cfgToast("Asset removed");
+        cfgConfirm(
+          `Remove ${id}?`,
+          "The asset and its KPIs will be removed. This can\u2019t be undone.",
+          "Remove asset",
+          () => {
+            p.assets = p.assets.filter((a) => a.id !== id);
+            if (CFG.addedAssets[p.hac])
+              CFG.addedAssets[p.hac] = CFG.addedAssets[p.hac].filter(
+                (a) => a.id !== id,
+              );
+            delete CFG.assetKpis[id];
+            cfgState.open.delete(id);
+            cfgRecount(p);
+            cfgSave();
+            renderConfig();
+            cfgToast("Asset removed");
+          },
+        );
+      }
+
+      /* ---------- add / edit / remove Global Overview KPI ---------- */
+      function cfgGlobalKpiDialog(kid) {
+        const list = cfgGlobalKpis();
+        const cur = kid ? list.find((k) => k.id === kid) : null;
+        const srcOpts = Object.entries(CFG_SOURCES)
+          .map(
+            ([key, v]) =>
+              `<option value="${key}"${cur && cur.source && cur.source.type === key ? " selected" : ""}>${esc(v.label)}</option>`,
+          )
+          .join("");
+        cfgOpenModal({
+          title: cur ? "Edit Global Overview KPI" : "Add Global Overview KPI",
+          sub: "Configure a KPI for the Global Overview page without changing the existing built-in KPIs.",
+          submit: cur ? "Save changes" : "Add KPI",
+          body:
+            cfgFld(
+              "name",
+              "KPI name",
+              `<input type="text" id="f_name" name="name" maxlength="60" autocomplete="off" placeholder="e.g. Total Production" value="${esc(cur ? cur.name : "")}" />`,
+            ) +
+            cfgFld(
+              "unit",
+              "Unit",
+              `<input type="text" id="f_unit" name="unit" maxlength="16" autocomplete="off" placeholder="e.g. t/h or %" value="${esc(cur ? cur.unit || "" : "")}" />`,
+              "Optional.",
+            ) +
+            cfgFld(
+              "displayValue",
+              "Display value",
+              `<input type="text" id="f_displayValue" name="displayValue" maxlength="30" autocomplete="off" placeholder="e.g. 8,240" value="${esc(cur ? cur.displayValue || "" : "")}" />`,
+              "Optional prototype value shown on the Global Overview card.",
+            ) +
+            cfgFld(
+              "stype",
+              "Data source",
+              `<select id="f_stype" name="stype"><option value="">Select where this KPI gets its data</option>${srcOpts}</select>`,
+            ) +
+            cfgFld(
+              "ref",
+              "Reference",
+              `<input type="text" id="f_ref" name="ref" autocomplete="off" value="${esc(cur && cur.source ? cur.source.ref || "" : "")}" />`,
+              null,
+              true,
+            ) +
+            cfgFld(
+              "refresh",
+              "Refresh",
+              `<select id="f_refresh" name="refresh">${CFG_REFRESH.map((r) => `<option${((cur && cur.source && cur.source.refresh) || "Hourly") === r ? " selected" : ""}>${r}</option>`).join("")}</select>`,
+              null,
+              true,
+            ),
+          onOpen(form) {
+            const showRef = () => {
+              const type = form.elements.stype.value;
+              const fld = form.querySelector('[data-f="ref"]');
+              const src = CFG_SOURCES[type];
+              fld.hidden = !src || !src.ref;
+              if (src && src.ref)
+                fld.querySelector("label").textContent = src.ref;
+              const rf = form.querySelector('[data-f="refresh"]');
+              rf.hidden = !type || type === "manual" || type === "demo";
+            };
+            form.elements.stype.addEventListener("change", showRef);
+            showRef();
+          },
+          onSubmit(form) {
+            const v = (n) => form.elements[n].value.trim();
+            const name = v("name");
+            const stype = v("stype");
+            if (!name) {
+              cfgErr(form, "name", "Enter a KPI name.");
+              return false;
+            }
+            if (
+              list.some(
+                (k) => k !== cur && k.name.toLowerCase() === name.toLowerCase(),
+              )
+            ) {
+              cfgErr(
+                form,
+                "name",
+                `Global Overview already has a KPI called ${name}.`,
+              );
+              return false;
+            }
+            if (!stype) {
+              cfgErr(form, "stype", "Choose where this KPI gets its data.");
+              return false;
+            }
+            const obj = {
+              id: cur ? cur.id : cfgUid(),
+              name,
+              unit: v("unit"),
+              displayValue: v("displayValue"),
+              source: { type: stype, ref: v("ref"), refresh: v("refresh") },
+            };
+            if (cur) Object.assign(cur, obj);
+            else list.push(obj);
+            cfgSave();
+            renderCfgGlobalSection();
+            renderConfiguredGlobalKpis();
+            cfgToast(cur ? "Global KPI saved" : "Global KPI added");
+          },
         });
+      }
+      function cfgDeleteGlobalKpi(kid) {
+        const list = cfgGlobalKpis();
+        const k = list.find((x) => x.id === kid);
+        if (!k) return;
+        cfgConfirm(
+          `Remove ${k.name}?`,
+          "The Global Overview KPI and its data source setting will be removed.",
+          "Remove KPI",
+          () => {
+            const i = list.indexOf(k);
+            if (i >= 0) list.splice(i, 1);
+            cfgSave();
+            renderCfgGlobalSection();
+            renderConfiguredGlobalKpis();
+            cfgToast("Global KPI removed");
+          },
+        );
       }
 
       /* ---------- add / edit / remove KPI (plant or asset scope) ---------- */
@@ -7008,7 +7703,10 @@ h1{font-size:30px;margin:0 0 7px}
         const s = (cur && cur.source) || {};
         const srcOpts = Object.entries(CFG_SOURCES)
           .filter(([k]) => k !== "demo" || s.type === "demo")
-          .map(([k, t]) => `<option value="${k}"${s.type === k ? " selected" : ""}>${esc(t.label)}</option>`)
+          .map(
+            ([k, t]) =>
+              `<option value="${k}"${s.type === k ? " selected" : ""}>${esc(t.label)}</option>`,
+          )
           .join("");
         cfgOpenModal({
           title: cur ? "Edit KPI" : isPlant ? "Add plant KPI" : "Add KPI",
@@ -7017,15 +7715,44 @@ h1{font-size:30px;margin:0 0 7px}
           wide: true,
           body:
             (isPlant
-              ? cfgFld("pillar", "Pillar", `<select id="f_pillar" name="pillar"><option value="">Select a pillar</option>${CFG_PILLARS.map((pl) => `<option value="${pl.id}"${cur && cur.pillar === pl.id ? " selected" : ""}>${pl.id}</option>`).join("")}</select>`)
+              ? cfgFld(
+                  "pillar",
+                  "Pillar",
+                  `<select id="f_pillar" name="pillar"><option value="">Select a pillar</option>${CFG_PILLARS.map((pl) => `<option value="${pl.id}"${cur && cur.pillar === pl.id ? " selected" : ""}>${pl.id}</option>`).join("")}</select>`,
+                )
               : "") +
             '<div class="cfg-row2">' +
-            cfgFld("name", "KPI name", `<input type="text" id="f_name" name="name" maxlength="60" autocomplete="off" placeholder="${isPlant ? "e.g. Kiln MTBF" : "e.g. Vibration"}" value="${esc(cur ? cur.name : "")}" />`) +
-            cfgFld("unit", "Unit", `<input type="text" id="f_unit" name="unit" maxlength="16" autocomplete="off" placeholder="e.g. kWh/t or %" value="${esc(cur ? cur.unit : "")}" />`, "Optional.") +
+            cfgFld(
+              "name",
+              "KPI name",
+              `<input type="text" id="f_name" name="name" maxlength="60" autocomplete="off" placeholder="${isPlant ? "e.g. Kiln MTBF" : "e.g. Vibration"}" value="${esc(cur ? cur.name : "")}" />`,
+            ) +
+            cfgFld(
+              "unit",
+              "Unit",
+              `<input type="text" id="f_unit" name="unit" maxlength="16" autocomplete="off" placeholder="e.g. kWh/t or %" value="${esc(cur ? cur.unit : "")}" />`,
+              "Optional.",
+            ) +
             "</div>" +
-            cfgFld("stype", "Data source", `<select id="f_stype" name="stype"><option value="">Select where this KPI gets its data</option>${srcOpts}</select>`) +
-            cfgFld("ref", `<span id="refLabel">Reference</span>`, `<input type="text" id="f_ref" name="ref" autocomplete="off" value="${esc(s.ref || "")}" />`, null, true) +
-            cfgFld("refresh", "Refresh", `<select id="f_refresh" name="refresh">${CFG_REFRESH.map((r) => `<option${(s.refresh || "Hourly") === r ? " selected" : ""}>${r}</option>`).join("")}</select>`, null, true),
+            cfgFld(
+              "stype",
+              "Data source",
+              `<select id="f_stype" name="stype"><option value="">Select where this KPI gets its data</option>${srcOpts}</select>`,
+            ) +
+            cfgFld(
+              "ref",
+              `<span id="refLabel">Reference</span>`,
+              `<input type="text" id="f_ref" name="ref" autocomplete="off" value="${esc(s.ref || "")}" />`,
+              null,
+              true,
+            ) +
+            cfgFld(
+              "refresh",
+              "Refresh",
+              `<select id="f_refresh" name="refresh">${CFG_REFRESH.map((r) => `<option${(s.refresh || "Hourly") === r ? " selected" : ""}>${r}</option>`).join("")}</select>`,
+              null,
+              true,
+            ),
           onOpen(form) {
             const el = (n) => form.elements[n];
             const sync = () => {
@@ -7040,31 +7767,71 @@ h1{font-size:30px;margin:0 0 7px}
             };
             el("stype").addEventListener("change", () => {
               sync();
-              if (!form.querySelector('[data-f="ref"]').hidden) el("ref").focus();
+              if (!form.querySelector('[data-f="ref"]').hidden)
+                el("ref").focus();
             });
             sync();
           },
           onSubmit(form) {
             const v = (n) => form.elements[n].value.trim();
-            const name = v("name"), unit = v("unit"), stype = v("stype"), ref = v("ref");
+            const name = v("name"),
+              unit = v("unit"),
+              stype = v("stype"),
+              ref = v("ref");
             let bad = false;
-            const err = (f, m) => { cfgErr(form, f, m); bad = true; };
+            const err = (f, m) => {
+              cfgErr(form, f, m);
+              bad = true;
+            };
             const pillar = isPlant ? v("pillar") : null;
             if (isPlant && !pillar) err("pillar", "Select a pillar.");
             if (!name) err("name", "Enter a KPI name.");
-            else if (/[<>&"'`]/.test(name)) err("name", "Remove the characters < > & \" ' `.");
-            else if (list.some((k) => k !== cur && k.name.toLowerCase() === name.toLowerCase())) err("name", `${isPlant ? "This plant" : "This asset"} already has a KPI called ${name}.`);
-            if (/[<>&"'`]/.test(unit)) err("unit", "Remove the characters < > & \" ' `.");
+            else if (/[<>&"'`]/.test(name))
+              err("name", "Remove the characters < > & \" ' `.");
+            else if (
+              list.some(
+                (k) => k !== cur && k.name.toLowerCase() === name.toLowerCase(),
+              )
+            )
+              err(
+                "name",
+                `${isPlant ? "This plant" : "This asset"} already has a KPI called ${name}.`,
+              );
+            if (/[<>&"'`]/.test(unit))
+              err("unit", "Remove the characters < > & \" ' `.");
             if (!stype) err("stype", "Choose where this KPI gets its data.");
             else if (CFG_SOURCES[stype].ref) {
-              if (!ref) err("ref", `Enter the ${CFG_SOURCES[stype].ref.toLowerCase()}.`);
-              else if (stype === "api" && !/^https?:\/\/\S+$/i.test(ref)) err("ref", "Enter a full URL starting with http:// or https://.");
+              if (!ref)
+                err(
+                  "ref",
+                  `Enter the ${CFG_SOURCES[stype].ref.toLowerCase()}.`,
+                );
+              else if (stype === "api" && !/^https?:\/\/\S+$/i.test(ref))
+                err(
+                  "ref",
+                  "Enter a full URL starting with http:// or https://.",
+                );
             }
             if (bad) return false;
             const hasRef = !!CFG_SOURCES[stype].ref;
-            const source = { type: stype, ref: hasRef ? ref : "", refresh: hasRef ? v("refresh") : "" };
-            if (cur) Object.assign(cur, { name, unit, source }, isPlant ? { pillar } : {});
-            else list.push(Object.assign({ id: cfgUid(), name, unit, source }, isPlant ? { pillar } : {}));
+            const source = {
+              type: stype,
+              ref: hasRef ? ref : "",
+              refresh: hasRef ? v("refresh") : "",
+            };
+            if (cur)
+              Object.assign(
+                cur,
+                { name, unit, source },
+                isPlant ? { pillar } : {},
+              );
+            else
+              list.push(
+                Object.assign(
+                  { id: cfgUid(), name, unit, source },
+                  isPlant ? { pillar } : {},
+                ),
+              );
             cfgSave();
             renderConfig();
             cfgToast(cur ? "KPI saved" : "KPI added");
@@ -7075,12 +7842,17 @@ h1{font-size:30px;margin:0 0 7px}
         const list = cfgScopeList(scope, aid);
         const k = list.find((x) => x.id === kid);
         if (!k) return;
-        cfgConfirm(`Remove ${k.name}?`, "The KPI and its data source setting will be removed.", "Remove KPI", () => {
-          list.splice(list.indexOf(k), 1);
-          cfgSave();
-          renderConfig();
-          cfgToast("KPI removed");
-        });
+        cfgConfirm(
+          `Remove ${k.name}?`,
+          "The KPI and its data source setting will be removed.",
+          "Remove KPI",
+          () => {
+            list.splice(list.indexOf(k), 1);
+            cfgSave();
+            renderConfig();
+            cfgToast("KPI removed");
+          },
+        );
       }
       function cfgReset() {
         cfgConfirm(
@@ -7417,6 +8189,7 @@ h1{font-size:30px;margin:0 0 7px}
         }
         armScreensaverTimer();
       })();
+      renderConfiguredGlobalKpis();
     </script>
   </body>
 </html>
